@@ -1,5 +1,9 @@
 package com.example.rat.spa;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -19,37 +23,66 @@ public class LoginActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_login);
 
+    String savedToken = getSavedToken();
+    String url = SpaUtil.URL.USER_LOGIN;
     HashMap<String, String> params = new HashMap<>();
-    params.put("Username", "admin_cloud");
-    params.put("Password", "123123");
+    boolean updateToken = true;
 
+    if (savedToken != null) {
+      updateToken = false;
+      url = SpaUtil.URL.USER_INDEX;
+      params.put("Token", savedToken);
+    } else {
+      params.put("Username", "admin_cloud");
+      params.put("Password", "123123");
+    }
+
+    final boolean finalUpdateToken = updateToken;
     new RequestHandler(this) {
       @Override
       public void handleResult(String result) {
-        showUserInfo(result);
+        if (finalUpdateToken) {
+          try {
+            saveUserInfo(result);
+          } catch (Exception e) {
+            e.printStackTrace();
+            return;
+          }
+        }
+
+        Intent intent = new Intent(getApplicationContext(), UserInfoActivity.class);
+        intent.putExtra("json-user-info", result);
+        startActivity(intent);
+        finish();
       }
 
       @Override
       public void handleError(VolleyError error) {
         Toast.makeText(LoginActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
       }
-    }.POST(SpaUtil.URL.USER_LOGIN, params);
+    }.POST(url, params);
   }
 
-  private void showUserInfo(String jsonStr) {
+  private void saveUserInfo(String jsonStr) throws Exception{
     try {
       JSONObject json = new JSONObject(jsonStr);
-      if (json.getInt("Status") != 1) return;
-
-      JSONObject data = json.getJSONObject("Data");
-      String token = data.getString("Token");
-      String name = data.getJSONObject("UserApp").getString("Name");
-
-      ((TextView)findViewById(R.id.txt_user_info)).setText(name);
-      Toast.makeText(this, token, Toast.LENGTH_SHORT).show();
+      if (json.getInt("Status") != 1) throw new Exception("Request failed...!");
+      String token = json.getJSONObject("Data").getString("Token");
+      saveToken(token);
     } catch (JSONException e) {
       e.printStackTrace();
-      // TODO: Handle this.
+      throw new Exception("Parse JSON failed...!");
     }
+  }
+
+  @Nullable
+  private String getSavedToken() {
+    SharedPreferences prefs = getSharedPreferences("spa", Context.MODE_PRIVATE);
+    return prefs.getString("token", null);
+  }
+
+  private void saveToken(String token) {
+    SharedPreferences prefs = getSharedPreferences("spa", Context.MODE_PRIVATE);
+    prefs.edit().putString("token", token).apply();
   }
 }
