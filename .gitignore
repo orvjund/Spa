@@ -10,3 +10,8 @@
 /captures
 .externalNativeBuild
 .idea/misc.xml
+.idea/gradle.xml
+.idea/kotlinc.xml
+.idea/misc.xml
+.idea/runConfigurations.xml
+.idea/vcs.xml
