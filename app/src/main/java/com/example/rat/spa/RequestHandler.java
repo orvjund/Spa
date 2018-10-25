@@ -27,8 +27,7 @@ public abstract class RequestHandler {
         {
           @Override
           public void onResponse(String response) {
-            // response
-            Log.d("Response", response);
+            Log.i("Response", response);
             handleResult(response);
           }
         },
@@ -36,8 +35,7 @@ public abstract class RequestHandler {
         {
           @Override
           public void onErrorResponse(VolleyError error) {
-            // error
-            Log.d("Error.Response", error.getMessage());
+            error.printStackTrace();
             handleError(error);
           }
         }
