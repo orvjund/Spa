@@ -11,4 +11,17 @@
     <string name="txt_email">Email</string>
     <string name="txt_dob">Date of Birth</string>
     <string name="txt_gender">Gender</string>
+    <string name="cb_changePassword">Change Password</string>
+    <string name="txt_nameEdit">Name</string>
+    <string name="txt_phoneNumberEdit">Phone number</string>
+    <string name="txt_cityEdit">Province/ City</string>
+    <string name="txt_districtEdit">County/ District</string>
+    <string name="txt_address">Address</string>
+    <string name="txt_email">Email</string>
+    <string name="txt_dob">Date of Birth</string>
+    <string name="txt_gender">Gender</string>
+    <string name="txt_oldPassword">Old Password</string>
+    <string name="txt_newPassword">New Password</string>
+    <string name="txt_retype">Retype password</string>
+    <string name="btn_updateInfo">Update Information</string>
 </resources>
