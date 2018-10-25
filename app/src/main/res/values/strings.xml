@@ -3,4 +3,12 @@
     <string name="login">Login</string>
     <string name="hint_username">Input username</string>
     <string name="hint_password">Input password</string>
+    <string name="txt_name">Name</string>
+    <string name="txt_phoneNumber">Phone number</string>
+    <string name="txt_city">Province/City</string>
+    <string name="txt_district">County/ District</string>
+    <string name="txt_address">Address</string>
+    <string name="txt_email">Email</string>
+    <string name="txt_dob">Date of Birth</string>
+    <string name="txt_gender">Gender</string>
 </resources>
