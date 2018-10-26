@@ -47,7 +47,7 @@
         app:layout_constraintBottom_toTopOf="@+id/cb_changePassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/txt_oldPassword"
-        app:layout_constraintTop_toBottomOf="@+id/txt_gender" />
+        app:layout_constraintTop_toBottomOf="@+id/label_gender" />
 
     <EditText
         android:id="@+id/et_gender"
@@ -57,10 +57,10 @@
         android:ems="10"
         android:inputType="text"
         android:text="Name"
-        app:layout_constraintBottom_toBottomOf="@+id/txt_gender"
+        app:layout_constraintBottom_toBottomOf="@+id/label_gender"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txt_gender"
-        app:layout_constraintTop_toTopOf="@+id/txt_gender" />
+        app:layout_constraintStart_toEndOf="@+id/label_gender"
+        app:layout_constraintTop_toTopOf="@+id/label_gender" />
 
     <EditText
         android:id="@+id/et_email"
@@ -70,10 +70,10 @@
         android:ems="10"
         android:inputType="text"
         android:text="Name"
-        app:layout_constraintBottom_toBottomOf="@+id/txt_email"
+        app:layout_constraintBottom_toBottomOf="@+id/label_email"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txt_email"
-        app:layout_constraintTop_toTopOf="@+id/txt_email" />
+        app:layout_constraintStart_toEndOf="@+id/label_email"
+        app:layout_constraintTop_toTopOf="@+id/label_email" />
 
     <EditText
         android:id="@+id/et_dob"
@@ -84,36 +84,36 @@
         android:ems="10"
         android:inputType="text"
         android:text="Name"
-        app:layout_constraintBottom_toTopOf="@+id/txt_gender"
+        app:layout_constraintBottom_toTopOf="@+id/label_gender"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txt_dob"
-        app:layout_constraintTop_toBottomOf="@+id/txt_email" />
+        app:layout_constraintStart_toEndOf="@+id/label_dob"
+        app:layout_constraintTop_toBottomOf="@+id/label_email" />
 
     <TextView
-        android:id="@+id/txt_name"
+        android:id="@+id/label_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="26dp"
         android:layout_marginTop="17dp"
         android:layout_marginEnd="105dp"
         android:layout_marginBottom="13dp"
-        android:text="@string/txt_nameEdit"
+        android:text="@string/name"
         app:layout_constraintBottom_toTopOf="@+id/et_phone"
         app:layout_constraintEnd_toStartOf="@+id/et_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txt_phoneNumber"
+        android:id="@+id/label_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="26dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="52dp"
-        android:text="@string/txt_phoneNumberEdit"
+        android:text="@string/phone_number"
         app:layout_constraintEnd_toStartOf="@+id/et_phone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_name" />
+        app:layout_constraintTop_toBottomOf="@+id/label_name" />
 
     <TextView
         android:id="@+id/txt_province"
@@ -122,69 +122,69 @@
         android:layout_marginStart="26dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="55dp"
-        android:text="@string/txt_cityEdit"
+        android:text="@string/city"
         app:layout_constraintEnd_toStartOf="@+id/et_city"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_phoneNumber" />
+        app:layout_constraintTop_toBottomOf="@+id/label_phone" />
 
     <TextView
-        android:id="@+id/txt_district"
+        android:id="@+id/label_district"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="26dp"
         android:layout_marginEnd="45dp"
         android:layout_marginBottom="15dp"
-        android:text="@string/txt_districtEdit"
-        app:layout_constraintBottom_toTopOf="@+id/txt_address"
+        android:text="@string/district"
+        app:layout_constraintBottom_toTopOf="@+id/label_address"
         app:layout_constraintEnd_toStartOf="@+id/et_district"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/txt_address"
+        android:id="@+id/label_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="26dp"
         android:layout_marginEnd="91dp"
         android:layout_marginBottom="16dp"
-        android:text="@string/txt_address"
-        app:layout_constraintBottom_toTopOf="@+id/txt_email"
+        android:text="@string/address"
+        app:layout_constraintBottom_toTopOf="@+id/label_email"
         app:layout_constraintEnd_toStartOf="@+id/et_address"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_district" />
 
     <TextView
-        android:id="@+id/txt_email"
+        android:id="@+id/label_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="26dp"
         android:layout_marginEnd="108dp"
         android:layout_marginBottom="17dp"
-        android:text="@string/txt_email"
+        android:text="@string/email"
         app:layout_constraintBottom_toTopOf="@+id/et_dob"
         app:layout_constraintEnd_toStartOf="@+id/et_email"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_address" />
+        app:layout_constraintTop_toBottomOf="@+id/label_address" />
 
     <TextView
-        android:id="@+id/txt_dob"
+        android:id="@+id/label_dob"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="26dp"
         android:layout_marginEnd="63dp"
         android:layout_marginBottom="13dp"
-        android:text="@string/txt_dob"
-        app:layout_constraintBottom_toTopOf="@+id/txt_gender"
+        android:text="@string/dob"
+        app:layout_constraintBottom_toTopOf="@+id/label_gender"
         app:layout_constraintEnd_toStartOf="@+id/et_dob"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/txt_gender"
+        android:id="@+id/label_gender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="26dp"
         android:layout_marginEnd="96dp"
         android:layout_marginBottom="15dp"
-        android:text="@string/txt_gender"
+        android:text="@string/gender"
         app:layout_constraintBottom_toTopOf="@+id/et_oldPassword"
         app:layout_constraintEnd_toStartOf="@+id/et_gender"
         app:layout_constraintStart_toStartOf="parent"
@@ -197,7 +197,7 @@
         android:layout_marginStart="26dp"
         android:layout_marginEnd="56dp"
         android:layout_marginBottom="12dp"
-        android:text="@string/txt_oldPassword"
+        android:text="@string/old_password"
         app:layout_constraintBottom_toTopOf="@+id/cb_changePassword"
         app:layout_constraintEnd_toStartOf="@+id/et_oldPassword"
         app:layout_constraintStart_toStartOf="parent" />
@@ -207,7 +207,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginBottom="18dp"
-        android:text="@string/cb_changePassword"
+        android:text="@string/change_password"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/et_newPassword"
         app:layout_constraintStart_toStartOf="@+id/txt_oldPassword"
@@ -220,7 +220,7 @@
         android:layout_marginStart="26dp"
         android:layout_marginTop="18dp"
         android:layout_marginEnd="50dp"
-        android:text="@string/txt_newPassword"
+        android:text="@string/new_password"
         app:layout_constraintEnd_toStartOf="@+id/et_newPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cb_changePassword" />
@@ -232,7 +232,7 @@
         android:layout_marginStart="26dp"
         android:layout_marginTop="11dp"
         android:layout_marginEnd="35dp"
-        android:text="@string/txt_retype"
+        android:text="@string/retype"
         app:layout_constraintEnd_toStartOf="@+id/et_retype"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_newPassword" />
@@ -242,7 +242,7 @@
         android:layout_width="0dp"
         android:layout_height="36dp"
         android:layout_marginBottom="42dp"
-        android:text="@string/btn_updateInfo"
+        android:text="@string/update_info"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -261,7 +261,7 @@
         android:text="Name"
         app:layout_constraintBottom_toTopOf="@+id/et_phone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txt_name"
+        app:layout_constraintStart_toEndOf="@+id/label_name"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
@@ -275,8 +275,8 @@
         android:text="Name"
         app:layout_constraintBottom_toTopOf="@+id/et_city"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txt_phoneNumber"
-        app:layout_constraintTop_toBottomOf="@+id/txt_name" />
+        app:layout_constraintStart_toEndOf="@+id/label_phone"
+        app:layout_constraintTop_toBottomOf="@+id/label_name" />
 
     <EditText
         android:id="@+id/et_city"
@@ -301,9 +301,9 @@
         android:ems="10"
         android:inputType="text"
         android:text="Name"
-        app:layout_constraintBottom_toTopOf="@+id/txt_address"
+        app:layout_constraintBottom_toTopOf="@+id/label_address"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txt_district"
+        app:layout_constraintStart_toEndOf="@+id/label_district"
         app:layout_constraintTop_toBottomOf="@+id/et_city" />
 
     <EditText
@@ -314,8 +314,8 @@
         android:ems="10"
         android:inputType="text"
         android:text="Name"
-        app:layout_constraintBottom_toBottomOf="@+id/txt_address"
+        app:layout_constraintBottom_toBottomOf="@+id/label_address"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txt_address"
-        app:layout_constraintTop_toTopOf="@+id/txt_address" />
+        app:layout_constraintStart_toEndOf="@+id/label_address"
+        app:layout_constraintTop_toTopOf="@+id/label_address" />
 </android.support.constraint.ConstraintLayout>

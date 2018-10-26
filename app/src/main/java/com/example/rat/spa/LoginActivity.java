@@ -66,11 +66,11 @@ public class LoginActivity extends AppCompatActivity {
 
   private void initLogin() {
     SharedPreferences prefs = getSharedPreferences("spa", Context.MODE_PRIVATE);
-    String username = prefs.getString("username", "");
-    String password = prefs.getString("password", "");
+    String username = prefs.getString("username", null);
+    String password = prefs.getString("password", null);
 
-    etUsername.setText(username);
-    etPassword.setText(password);
+    if (username != null) etUsername.setText(username);
+    if (password != null) etPassword.setText(password);
     btnLogin.setEnabled(true);
   }
 
