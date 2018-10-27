@@ -5,3 +5,8 @@
 /captures
 .externalNativeBuild
 .idea
+local.properties
+.idea/vcs.xml
+.idea/runConfigurations.xml
+.idea/misc.xml
+.idea/gradle.xml

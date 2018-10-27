@@ -1,17 +1,17 @@
-package com.example.rat.spa;
+package com.example.rat.spa.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.rat.spa.R;
+import com.example.rat.spa.model.UserApp;
+
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
-
-import java.util.Calendar;
-import java.util.Date;
 
 public class UserInfoActivity extends AppCompatActivity {
   TextView txtName;
@@ -33,42 +33,46 @@ public class UserInfoActivity extends AppCompatActivity {
     Intent intent = getIntent();
     String jsonUserInfo = intent.getStringExtra("json-user-info");
     loadUserInfo(jsonUserInfo);
-
   }
 
   private void loadUserInfo(String json) {
     try {
-      JSONObject data = new JSONObject(json)
-          .getJSONObject("Data");
-      JSONObject userApp;
-
-      try {
-        userApp = data.getJSONArray("UserApps").getJSONObject(0);
-      } catch (JSONException e) {
-        userApp = data.getJSONObject("UserApp");
-      }
-
-      txtName.setText(userApp.getString("Name"));
-      txtPhoneNumber.setText(userApp.getString("Phone"));
-      txtCity.setText(userApp.getString("ProvinceName"));
-      txtDistrict.setText(userApp.getString("DistrictName"));
-      txtAddress.setText(userApp.getString("Address"));
-      txtEmail.setText(userApp.getString("Email"));
-
-      long intDoB = userApp.getLong("Birthday");
-      Date date = new Date(intDoB);
-      txtDob.setText(date.toString());
-      switch (userApp.getInt("Gender")) {
-        case 1:
-          txtGender.setText(R.string.female);
-          break;
-        default:
-          txtGender.setText(R.string.male);
-      }
-
+      JSONObject jsonUserApp = getJSONUserApp(json);
+      UserApp userApp = UserApp.parseJSONObject(jsonUserApp);
+      fillUserInfo(userApp);
     } catch (JSONException e) {
       e.printStackTrace();
       Toast.makeText(this, "Failed to get user info..!", Toast.LENGTH_SHORT).show();
+    }
+  }
+
+  private JSONObject getJSONUserApp(String json) throws JSONException {
+    JSONObject data = new JSONObject(json).getJSONObject("Data");
+
+    try {
+      return data
+          .getJSONArray("UserApps")
+          .getJSONObject(0);
+    } catch (JSONException e) {
+      return data.getJSONObject("UserApp");
+    }
+  }
+
+  private void fillUserInfo(UserApp userApp) {
+    txtName.setText(userApp.getName());
+    txtPhoneNumber.setText(userApp.getPhone());
+    txtCity.setText(userApp.getProvinceName());
+    txtDistrict.setText(userApp.getDistrictName());
+    txtAddress.setText(userApp.getAddress());
+    txtEmail.setText(userApp.getEmail());
+    txtDob.setText(userApp.getBirthday().toString());
+
+    switch (userApp.getGender()) {
+      case 1:
+        txtGender.setText(R.string.female);
+        break;
+      default:
+        txtGender.setText(R.string.male);
     }
   }
 
@@ -83,5 +87,8 @@ public class UserInfoActivity extends AppCompatActivity {
     txtGender = findViewById(R.id.txt_gender);
   }
 
-
+  public void toEditUserInfo(View view) {
+    startActivity(new Intent(this, EditUserInfoActivity.class));
+    finish();
+  }
 }
