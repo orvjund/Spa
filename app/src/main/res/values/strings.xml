@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Spa</string>
     <string name="login">Login</string>
-    <string name="hint_username">Input username</string>
-    <string name="hint_password">Input password</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
     <string name="name">Name</string>
     <string name="phone_number">Phone number</string>
     <string name="city">Province/City</string>
