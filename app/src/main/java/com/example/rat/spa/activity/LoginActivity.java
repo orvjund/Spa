@@ -1,8 +1,6 @@
 package com.example.rat.spa.activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,16 +11,12 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.rat.spa.R;
-import com.example.rat.spa.api.RequestBase;
 import com.example.rat.spa.api.UserIndexRequest;
 import com.example.rat.spa.api.UserLoginRequest;
 import com.example.rat.spa.util.SharedPref;
-import com.example.rat.spa.util.SpaURL;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.HashMap;
 
 public class LoginActivity extends AppCompatActivity {
   private EditText etUsername;
@@ -53,8 +47,8 @@ public class LoginActivity extends AppCompatActivity {
   private void handleSavedToken(String token) {
     new UserIndexRequest(this, token) {
       @Override
-      public void handleResult(String json) {
-        handleLoginResult(json);
+      public void handleResult(String response) {
+        toUserInfoActivity(response);
       }
 
       @Override
@@ -84,8 +78,8 @@ public class LoginActivity extends AppCompatActivity {
 
       new UserLoginRequest(this, username, password) {
         @Override
-        public void handleResult(String json) {
-          handleLoginResult(json);
+        public void handleResult(String response) {
+          handleLoginResult(response);
         }
 
         @Override
@@ -102,21 +96,13 @@ public class LoginActivity extends AppCompatActivity {
 
   private void handleLoginResult(String response) {
     try {
-      if (RequestBase.isRequestFailed(response)) throw new Exception();
-
-      try {
-        String token = new JSONObject(response)
-            .getJSONObject("Data")
-            .getString("Token");
-        saveLoginDetail(token);
-      } catch (JSONException ignore) {
-      }
-
+      String token = new JSONObject(response)
+          .getJSONObject("Data")
+          .getString("Token");
+      saveLoginDetail(token);
       toUserInfoActivity(response);
-    } catch (Exception e) {
+    } catch (JSONException e) {
       e.printStackTrace();
-      toastMessage("Login failed...!");
-      initLogin();
     }
   }
 

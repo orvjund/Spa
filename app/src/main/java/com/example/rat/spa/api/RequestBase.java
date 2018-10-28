@@ -19,18 +19,22 @@ import java.util.Map;
 public abstract class RequestBase {
   private Context context;
 
-  public RequestBase(Context context) {
+  RequestBase(Context context) {
     this.context = context;
   }
 
-  public void POST(String url, final HashMap<String, String> params) {
+  void POST(String url, final HashMap<String, String> params) {
     RequestQueue queue = Volley.newRequestQueue(context);
     StringRequest postRequest = new StringRequest(Request.Method.POST, url,
         new Response.Listener<String>() {
           @Override
           public void onResponse(String response) {
             Log.i("Response", response);
-            handleResult(response);
+            if (requestSucceeded(response)) {
+              handleResult(response);
+            } else {
+              handleError(errorFromResponse(response));
+            }
           }
         },
         new Response.ErrorListener() {
@@ -49,19 +53,62 @@ public abstract class RequestBase {
     queue.add(postRequest);
   }
 
+  void GET(String url, final HashMap<String, String> params) {
+    RequestQueue queue = Volley.newRequestQueue(context);
+    StringRequest postRequest = new StringRequest(Request.Method.GET, url,
+        new Response.Listener<String>() {
+          @Override
+          public void onResponse(String response) {
+            Log.i("Response", response);
+            if (requestSucceeded(response)) {
+              handleResult(response);
+            } else {
+              handleError(errorFromResponse(response));
+            }
+          }
+        },
+        new Response.ErrorListener() {
+          @Override
+          public void onErrorResponse(VolleyError error) {
+            error.printStackTrace();
+            handleError(error);
+          }
+        }
+    ) {
+      @Override
+      protected Map<String, String> getParams() {
+        return params != null ? params : new HashMap<String, String>();
+      }
+    };
+    queue.add(postRequest);
+  }
+
+  private VolleyError errorFromResponse(String response) {
+    String message = "Unknown message...!";
+    try {
+      message = new JSONObject(response)
+          .getJSONArray("Messages")
+          .getJSONObject(0)
+          .getString("text");
+    } catch (Exception ignore) {
+    }
+
+    return new VolleyError(message);
+  }
+
   public abstract void handleResult(String result);
 
   public abstract void handleError(VolleyError error);
 
-  public static boolean isRequestFailed(String json) {
-    JSONObject result = null;
+  private static boolean requestSucceeded(String json) {
+    JSONObject result;
     try {
       result = new JSONObject(json);
       int status = result.getInt("Status");
-      return status != 1;
+      return status == 1;
     } catch (JSONException e) {
       e.printStackTrace();
-      return true;
+      return false;
     }
   }
 }
