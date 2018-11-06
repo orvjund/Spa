@@ -37,7 +37,7 @@ public class EditUserInfoActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_edit_user_info);
-
+    getSupportActionBar().setTitle("Edit User Info");
     initViewVariables();
     initSpinners();
   }
