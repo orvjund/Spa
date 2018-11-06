@@ -1,324 +1,322 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activity.EditUserInfoActivity"
-    tools:layout_editor_absoluteY="81dp">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".activity.EditUserInfoActivity"
+  tools:layout_editor_absoluteY="81dp">
 
-    <EditText
-        android:id="@+id/et_gender"
-        android:layout_width="0dp"
-        android:layout_height="19dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="13dp"
-        android:layout_marginBottom="35dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="@+id/txt_old_password"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/label_gender"
-        app:layout_constraintTop_toTopOf="@+id/label_dob" />
+  <EditText
+    android:onClick="selectGender"
+    android:id="@+id/et_gender"
+    android:layout_width="0dp"
+    android:layout_height="19dp"
+    android:layout_marginTop="35dp"
+    android:layout_marginEnd="13dp"
+    android:layout_marginBottom="35dp"
+    android:ems="10"
+    android:inputType="text"
+    android:text=""
+    app:layout_constraintBottom_toBottomOf="@+id/txt_old_password"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/label_gender"
+    app:layout_constraintTop_toTopOf="@+id/label_dob" />
 
-    <EditText
-        android:id="@+id/et_email"
-        android:layout_width="209dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="13dp"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/et_dob"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label_address" />
+  <EditText
+    android:id="@+id/et_email"
+    android:layout_width="209dp"
+    android:layout_height="0dp"
+    android:layout_marginEnd="4dp"
+    android:layout_marginBottom="13dp"
+    android:ems="10"
+    android:inputType="textEmailAddress"
+    android:text=""
+    app:layout_constraintBottom_toTopOf="@+id/et_dob"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/label_address" />
 
-    <EditText
-        android:id="@+id/et_dob"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="13dp"
-        android:layout_marginBottom="24dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/label_gender"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/label_dob"
-        app:layout_constraintTop_toBottomOf="@+id/et_email" />
+  <EditText
+    android:id="@+id/et_dob"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_marginEnd="13dp"
+    android:layout_marginBottom="24dp"
+    android:ems="10"
+    android:inputType="text"
+    android:text=""
+    app:layout_constraintBottom_toTopOf="@+id/label_gender"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/label_dob"
+    app:layout_constraintTop_toBottomOf="@+id/et_email" />
 
-    <TextView
-        android:id="@+id/label_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="105dp"
-        android:layout_marginBottom="15dp"
-        android:text="@string/name"
-        app:layout_constraintBottom_toTopOf="@+id/et_phone"
-        app:layout_constraintEnd_toStartOf="@+id/et_name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+  <TextView
+    android:id="@+id/label_name"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="26dp"
+    android:layout_marginTop="19dp"
+    android:layout_marginEnd="105dp"
+    android:layout_marginBottom="15dp"
+    android:text="@string/name"
+    app:layout_constraintBottom_toTopOf="@+id/et_phone"
+    app:layout_constraintEnd_toStartOf="@+id/et_name"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/label_phone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="52dp"
-        android:text="@string/phone_number"
-        app:layout_constraintEnd_toStartOf="@+id/et_phone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label_name" />
+  <TextView
+    android:id="@+id/label_phone"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="26dp"
+    android:layout_marginTop="14dp"
+    android:layout_marginEnd="52dp"
+    android:text="@string/phone_number"
+    app:layout_constraintEnd_toStartOf="@+id/et_phone"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/label_name" />
 
-    <TextView
-        android:id="@+id/txt_province"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="55dp"
-        android:text="@string/city"
-        app:layout_constraintEnd_toStartOf="@+id/et_city"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label_phone" />
+  <TextView
+    android:id="@+id/txt_province"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="26dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginEnd="55dp"
+    android:text="@string/city"
+    app:layout_constraintEnd_toStartOf="@+id/spinner_city"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/label_phone" />
 
-    <TextView
-        android:id="@+id/label_district"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginBottom="15dp"
-        android:text="@string/district"
-        app:layout_constraintBottom_toTopOf="@+id/label_address"
-        app:layout_constraintEnd_toStartOf="@+id/et_district"
-        app:layout_constraintStart_toStartOf="parent" />
+  <TextView
+    android:id="@+id/label_district"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="26dp"
+    android:layout_marginEnd="45dp"
+    android:layout_marginBottom="15dp"
+    android:text="@string/district"
+    app:layout_constraintBottom_toTopOf="@+id/label_address"
+    app:layout_constraintEnd_toStartOf="@+id/spinner_district"
+    app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/label_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginEnd="91dp"
-        android:layout_marginBottom="12dp"
-        android:text="@string/address"
-        app:layout_constraintBottom_toTopOf="@+id/et_email"
-        app:layout_constraintEnd_toStartOf="@+id/et_address"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_district" />
+  <TextView
+    android:id="@+id/label_address"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="26dp"
+    android:layout_marginEnd="91dp"
+    android:layout_marginBottom="12dp"
+    android:text="@string/address"
+    app:layout_constraintBottom_toTopOf="@+id/et_email"
+    app:layout_constraintEnd_toStartOf="@+id/et_address"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/spinner_district" />
 
-    <TextView
-        android:id="@+id/label_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="167dp"
-        android:text="@string/email"
-        app:layout_constraintEnd_toStartOf="@+id/et_email"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label_address" />
+  <TextView
+    android:id="@+id/label_email"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="26dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginEnd="167dp"
+    android:text="@string/email"
+    app:layout_constraintEnd_toStartOf="@+id/et_email"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/label_address" />
 
-    <TextView
-        android:id="@+id/label_dob"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginEnd="63dp"
-        android:layout_marginBottom="15dp"
-        android:text="@string/birthday"
-        app:layout_constraintBottom_toTopOf="@+id/label_gender"
-        app:layout_constraintEnd_toStartOf="@+id/et_dob"
-        app:layout_constraintStart_toStartOf="parent" />
+  <TextView
+    android:id="@+id/label_dob"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="26dp"
+    android:layout_marginEnd="63dp"
+    android:layout_marginBottom="15dp"
+    android:text="@string/birthday"
+    app:layout_constraintBottom_toTopOf="@+id/label_gender"
+    app:layout_constraintEnd_toStartOf="@+id/et_dob"
+    app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/label_gender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginEnd="96dp"
-        android:layout_marginBottom="11dp"
-        android:text="@string/gender"
-        app:layout_constraintBottom_toTopOf="@+id/et_old_password"
-        app:layout_constraintEnd_toStartOf="@+id/et_gender"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_dob" />
+  <TextView
+    android:id="@+id/label_gender"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="26dp"
+    android:layout_marginEnd="96dp"
+    android:layout_marginBottom="11dp"
+    android:text="@string/gender"
+    app:layout_constraintBottom_toTopOf="@+id/et_old_password"
+    app:layout_constraintEnd_toStartOf="@+id/et_gender"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/et_dob" />
 
-    <TextView
-        android:id="@+id/txt_old_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginEnd="56dp"
-        android:layout_marginBottom="6dp"
-        android:text="@string/old_password"
-        app:layout_constraintBottom_toTopOf="@+id/cb_change_password"
-        app:layout_constraintEnd_toStartOf="@+id/et_old_password"
-        app:layout_constraintStart_toStartOf="parent" />
+  <TextView
+    android:id="@+id/txt_old_password"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="26dp"
+    android:layout_marginEnd="56dp"
+    android:layout_marginBottom="6dp"
+    android:text="@string/old_password"
+    app:layout_constraintBottom_toTopOf="@+id/cb_change_password"
+    app:layout_constraintEnd_toStartOf="@+id/et_old_password"
+    app:layout_constraintStart_toStartOf="parent" />
 
-    <CheckBox
-        android:id="@+id/cb_change_password"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginBottom="11dp"
-        android:text="@string/change_password"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/et_new_password"
-        app:layout_constraintStart_toStartOf="@+id/txt_old_password"
-        app:layout_constraintTop_toBottomOf="@+id/et_old_password" />
+  <CheckBox
+    android:id="@+id/cb_change_password"
+    android:layout_width="wrap_content"
+    android:layout_height="0dp"
+    android:layout_marginBottom="11dp"
+    android:text="@string/change_password"
+    android:textSize="12sp"
+    app:layout_constraintBottom_toTopOf="@+id/et_new_password"
+    app:layout_constraintStart_toStartOf="@+id/txt_old_password"
+    app:layout_constraintTop_toBottomOf="@+id/et_old_password" />
 
-    <TextView
-        android:id="@+id/txt_new_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="51dp"
-        android:text="@string/new_password"
-        app:layout_constraintEnd_toStartOf="@+id/et_new_password"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cb_change_password" />
+  <TextView
+    android:id="@+id/txt_new_password"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="26dp"
+    android:layout_marginTop="11dp"
+    android:layout_marginEnd="51dp"
+    android:text="@string/new_password"
+    app:layout_constraintEnd_toStartOf="@+id/et_new_password"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/cb_change_password" />
 
-    <TextView
-        android:id="@+id/txt_retype_pass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="36dp"
-        android:text="@string/retype"
-        app:layout_constraintEnd_toStartOf="@+id/et_retype"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_new_password" />
+  <TextView
+    android:id="@+id/txt_retype_pass"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="26dp"
+    android:layout_marginTop="11dp"
+    android:layout_marginEnd="36dp"
+    android:text="@string/retype"
+    app:layout_constraintEnd_toStartOf="@+id/et_retype"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/txt_new_password" />
 
-    <Button
-        android:id="@+id/btn_update"
-        android:layout_width="0dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="9dp"
-        android:text="@string/update_info"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_retype" />
+  <Button
+    android:id="@+id/btn_update"
+    android:layout_width="0dp"
+    android:layout_height="45dp"
+    android:layout_marginBottom="9dp"
+    android:onClick="updateUserInfo"
+    android:text="@string/update_info"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/et_retype" />
 
-    <EditText
-        android:id="@+id/et_name"
-        android:layout_width="0dp"
-        android:layout_height="19dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="13dp"
-        android:layout_marginBottom="16dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/et_phone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/label_name"
-        app:layout_constraintTop_toTopOf="parent" />
+  <EditText
+    android:id="@+id/et_name"
+    android:layout_width="0dp"
+    android:layout_height="19dp"
+    android:layout_marginTop="18dp"
+    android:layout_marginEnd="13dp"
+    android:layout_marginBottom="16dp"
+    android:ems="10"
+    android:inputType="textPersonName"
+    android:text=""
+    app:layout_constraintBottom_toTopOf="@+id/et_phone"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/label_name"
+    app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/et_phone"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:ems="10"
-        android:inputType="phone"
-        android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/et_city"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/label_phone"
-        app:layout_constraintTop_toBottomOf="@+id/label_name" />
+  <EditText
+    android:id="@+id/et_phone"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="16dp"
+    android:ems="10"
+    android:inputType="phone"
+    android:text=""
+    app:layout_constraintBottom_toTopOf="@+id/spinner_city"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/label_phone"
+    app:layout_constraintTop_toBottomOf="@+id/label_name" />
 
-    <EditText
-        android:id="@+id/et_city"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="13dp"
-        android:layout_marginBottom="18dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/et_district"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txt_province"
-        app:layout_constraintTop_toBottomOf="@+id/et_phone" />
+  <Spinner
+    android:id="@+id/spinner_city"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="13dp"
+    android:layout_marginBottom="18dp"
+    android:ems="10"
+    app:layout_constraintBottom_toTopOf="@+id/spinner_district"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/txt_province"
+    app:layout_constraintTop_toBottomOf="@+id/et_phone" />
 
-    <EditText
-        android:id="@+id/et_district"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="16dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/label_address"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/label_district"
-        app:layout_constraintTop_toBottomOf="@+id/et_city" />
+  <Spinner
+    android:id="@+id/spinner_district"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="12dp"
+    android:layout_marginBottom="16dp"
+    android:ems="10"
+    app:layout_constraintBottom_toTopOf="@+id/label_address"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/label_district"
+    app:layout_constraintTop_toBottomOf="@+id/spinner_city" />
 
-    <EditText
-        android:id="@+id/et_address"
-        android:layout_width="0dp"
-        android:layout_height="19dp"
-        android:layout_marginTop="58dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="58dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/label_dob"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/label_address"
-        app:layout_constraintTop_toBottomOf="@+id/et_city" />
+  <EditText
+    android:id="@+id/et_address"
+    android:layout_width="0dp"
+    android:layout_height="19dp"
+    android:layout_marginTop="58dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginBottom="58dp"
+    android:ems="10"
+    android:inputType="text"
+    android:text=""
+    app:layout_constraintBottom_toTopOf="@+id/label_dob"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/label_address"
+    app:layout_constraintTop_toBottomOf="@+id/spinner_city" />
 
-    <EditText
-        android:id="@+id/et_old_password"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="7dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/cb_change_password"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txt_old_password"
-        app:layout_constraintTop_toBottomOf="@+id/label_gender" />
+  <EditText
+    android:id="@+id/et_old_password"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginBottom="7dp"
+    android:ems="10"
+    android:inputType="textPassword"
+    android:text=""
+    app:layout_constraintBottom_toTopOf="@+id/cb_change_password"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/txt_old_password"
+    app:layout_constraintTop_toBottomOf="@+id/label_gender" />
 
-    <EditText
-        android:id="@+id/et_new_password"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="12dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/et_retype"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txt_new_password"
-        app:layout_constraintTop_toBottomOf="@+id/cb_change_password" />
+  <EditText
+    android:id="@+id/et_new_password"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginBottom="12dp"
+    android:ems="10"
+    android:inputType="textPassword"
+    android:text=""
+    app:layout_constraintBottom_toTopOf="@+id/et_retype"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/txt_new_password"
+    app:layout_constraintTop_toBottomOf="@+id/cb_change_password" />
 
-    <EditText
-        android:id="@+id/et_retype"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="16dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/btn_update"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txt_retype_pass"
-        app:layout_constraintTop_toBottomOf="@+id/et_new_password" />
+  <EditText
+    android:id="@+id/et_retype"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginBottom="16dp"
+    android:ems="10"
+    android:inputType="textPassword"
+    android:text=""
+    app:layout_constraintBottom_toTopOf="@+id/btn_update"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/txt_retype_pass"
+    app:layout_constraintTop_toBottomOf="@+id/et_new_password" />
 </android.support.constraint.ConstraintLayout>

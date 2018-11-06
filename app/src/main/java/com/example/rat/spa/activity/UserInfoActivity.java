@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.example.rat.spa.R;
 import com.example.rat.spa.model.UserApp;
+import com.example.rat.spa.util.SharedPref;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -89,6 +90,12 @@ public class UserInfoActivity extends AppCompatActivity {
 
   public void toEditUserInfo(View view) {
     startActivity(new Intent(this, EditUserInfoActivity.class));
+    finish();
+  }
+
+  public void logOut(View view) {
+    SharedPref.delete(this, "token");
+    startActivity(new Intent(this, LoginActivity.class));
     finish();
   }
 }

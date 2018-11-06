@@ -15,4 +15,9 @@ public class SharedPref {
     SharedPreferences prefs = activity.getSharedPreferences("spa", Context.MODE_PRIVATE);
     prefs.edit().putString(name, value).apply();
   }
+
+  public static void delete(Activity activity, String name) {
+    SharedPreferences prefs = activity.getSharedPreferences("spa", Context.MODE_PRIVATE);
+    prefs.edit().remove(name).apply();
+  }
 }

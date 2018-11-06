@@ -5,4 +5,5 @@ public class SpaURL {
   public static final String USER_INDEX = SERVER_ENTRY + "user/index";
   public static final String USER_LOGIN = SERVER_ENTRY + "account/login";
   public static final String GET_ADDRESS = SERVER_ENTRY + "account/getaddress";
+  public static final String ACCOUNT_LOGOUT = SERVER_ENTRY + "account/Logout";
 }
