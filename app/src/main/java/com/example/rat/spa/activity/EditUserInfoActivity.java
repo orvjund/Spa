@@ -32,12 +32,15 @@ public class EditUserInfoActivity extends AppCompatActivity {
   EditText etOldPassword;
   EditText etNewPassword;
   EditText etRetypePassword;
+  int currentProvinceId = -1;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_edit_user_info);
+
     getSupportActionBar().setTitle("Edit User Info");
+
     initViewVariables();
     initSpinners();
   }
@@ -53,34 +56,43 @@ public class EditUserInfoActivity extends AppCompatActivity {
 
       @Override
       public void handleAddresses(final ArrayList<Province> provinces) {
-        ArrayList<String> provinceNames = new ArrayList<>();
         spinnerCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
           @Override
           public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            ArrayList<String> districNames = new ArrayList<>();
-            for (District district : provinces.get(position).getDistricts()) {
-              districNames.add(district.getName());
-            }
-            ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getApplicationContext(),
-                R.layout.simple_spinner_item,
-                districNames);
-            spinnerDistrict.setAdapter(spinnerAdapter);
-            spinnerDistrict.setSelection(0, true);
+            setDistrictSpinnerAdapter(provinces.get(position).getDistricts());
+            currentProvinceId = provinces.get(position).getId();
           }
-
           @Override
-          public void onNothingSelected(AdapterView<?> parent) {}
+          public void onNothingSelected(AdapterView<?> parent) {
+          }
         });
-        for (Province province : provinces) {
-          provinceNames.add(province.getName());
-        }
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getApplicationContext(),
-            R.layout.simple_spinner_item,
-            provinceNames);
-        spinnerCity.setAdapter(spinnerAdapter);
-        spinnerCity.setSelection(0, true);
+        setProvinceSpinnerAdapter(provinces);
       }
     };
+  }
+
+  private void setDistrictSpinnerAdapter(ArrayList<District> districts) {
+    ArrayList<String> districtNames = new ArrayList<>();
+    for (District district : districts) {
+      districtNames.add(district.getName());
+    }
+    ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getApplicationContext(),
+        R.layout.simple_spinner_item,
+        districtNames);
+    spinnerDistrict.setAdapter(spinnerAdapter);
+    spinnerDistrict.setSelection(0, true);
+  }
+
+  private void setProvinceSpinnerAdapter(ArrayList<Province> provinces) {
+    ArrayList<String> provinceNames = new ArrayList<>();
+    for (Province province : provinces) {
+      provinceNames.add(province.getName());
+    }
+    ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getApplicationContext(),
+        R.layout.simple_spinner_item,
+        provinceNames);
+    spinnerCity.setAdapter(spinnerAdapter);
+    spinnerCity.setSelection(0, true);
   }
 
   private void initViewVariables() {
