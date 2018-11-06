@@ -5,34 +5,38 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/txt_store_name"
-        android:gravity="center"
+        android:id="@+id/txt_username"
+        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/txt_phone_number"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_action_phone"
         android:layout_weight="1" />
 
     <TextView
-        android:id="@+id/txt_district"
-        android:gravity="center"
+        android:id="@+id/txt_content"
+        android:layout_gravity="center"
+        android:drawableLeft="@drawable/ic_action_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_action_location"
         android:layout_weight="1" />
 
     <TextView
-        android:id="@+id/txt_city"
+        android:id="@+id/txt_time"
+        android:layout_gravity="center"
+        android:drawableLeft="@drawable/ic_action_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <EditText
+        android:id="@+id/et_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:drawableLeft="@drawable/ic_action_location"
-        android:gravity="center" />
+        android:paddingLeft="20dp"
+        android:background="@drawable/custom_edit_text"
+        android:drawableRight="@drawable/ic_action_send"
+        android:ems="10"
+        android:hint="Enter comment"
+        android:inputType="textPersonName" />
+
 </LinearLayout>
