@@ -51,7 +51,7 @@ public class EditUserInfoActivity extends AppCompatActivity {
   }
 
   private void loadUserInfo() {
-    new UserIndexRequest(this, SharedPref.getString(this, "token")) {
+    new UserIndexRequest(this, SharedPref.getToken(this)) {
       @Override
       public void handleResult(String result) {
         try {
@@ -158,7 +158,8 @@ public class EditUserInfoActivity extends AppCompatActivity {
   }
 
   public void updateUserInfo(View view) {
-    String token = SharedPref.getString(this, "token");
+//    TODO: Handle info editing...! :"}
+    String token = SharedPref.getToken(this);
   }
 
   public void selectGender(View view) {

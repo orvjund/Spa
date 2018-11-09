@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     getSupportActionBar().hide();
     initViewVariables();
 
-    String savedToken = SharedPref.getString(this, "token");
+    String savedToken = SharedPref.getToken(this);
     if (savedToken != null) {
       handleSavedToken(savedToken);
     } else {

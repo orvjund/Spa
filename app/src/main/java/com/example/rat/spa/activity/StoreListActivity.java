@@ -31,7 +31,7 @@ public class StoreListActivity extends AppCompatActivity {
 
   private void loadStoreList() {
     final Activity thisActivity = this;
-    new StoreListRequest(this, SharedPref.getString(this, "token")) {
+    new StoreListRequest(this, SharedPref.getToken(thisActivity)) {
       @Override
       public void handleError(VolleyError error) {
         error.printStackTrace();

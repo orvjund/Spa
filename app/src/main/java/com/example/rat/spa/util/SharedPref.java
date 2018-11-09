@@ -11,6 +11,11 @@ public class SharedPref {
     return prefs.getString(name, null);
   }
 
+  public static String getToken(Activity activity) {
+    SharedPreferences prefs = activity.getSharedPreferences("spa", Context.MODE_PRIVATE);
+    return prefs.getString("token", null);
+  }
+
   public static void putString(Activity activity, String name, String value) {
     SharedPreferences prefs = activity.getSharedPreferences("spa", Context.MODE_PRIVATE);
     prefs.edit().putString(name, value).apply();

@@ -100,6 +100,7 @@
         app:layout_constraintVertical_bias="0.454" />
 
       <RatingBar
+        android:onClick="initRating"
         android:id="@+id/my_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
