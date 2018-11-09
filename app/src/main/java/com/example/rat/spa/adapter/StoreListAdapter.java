@@ -27,6 +27,7 @@ public class StoreListAdapter extends BaseAdapter {
   @Override
   public long getItemId(int position) {
     return stores.get(position).storeId;
+  }
 
   @Override
   public View getView(int position, View convertView, ViewGroup parent) {
