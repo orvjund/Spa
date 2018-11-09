@@ -5,7 +5,7 @@ public class Store {
   public String name;
   public String describe;
   public String provinceName;
-  public String districName;
+  public String districtName;
   public String address;
   public String email;
   public String phone;

@@ -48,13 +48,7 @@ public class LoginActivity extends AppCompatActivity {
     new UserIndexRequest(this, token) {
       @Override
       public void handleResult(String response) {
-//        toStoreListActivity();
-
-//    FIXME: This is pure stupid, just to show UserInfoActivity...!
-        Intent intent = new Intent(getApplicationContext(), UserInfoActivity.class);
-        intent.putExtra("json-user-info", response);
-        startActivity(intent);
-        finish();
+        toStoreListActivity();
       }
 
       @Override

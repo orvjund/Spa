@@ -1,5 +1,6 @@
 package com.example.rat.spa.activity;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
@@ -29,6 +30,7 @@ public class StoreListActivity extends AppCompatActivity {
   }
 
   private void loadStoreList() {
+    final Activity thisActivity = this;
     new StoreListRequest(this, SharedPref.getString(this, "token")) {
       @Override
       public void handleError(VolleyError error) {
@@ -39,7 +41,7 @@ public class StoreListActivity extends AppCompatActivity {
 
       @Override
       public void handleStores(ArrayList<Store> stores) {
-        storeList.setAdapter(new StoreListAdapter(stores));
+        storeList.setAdapter(new StoreListAdapter(thisActivity, stores));
       }
     };
   }
