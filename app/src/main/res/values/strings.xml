@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Spa</string>
+    <string name="app_name">Sophia</string>
     <string name="login">Login</string>
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
