@@ -3,6 +3,7 @@ package com.example.rat.spa.model;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class UserApp {
@@ -16,7 +17,8 @@ public class UserApp {
   private Date birthday;
   private int gender;
 
-  public static UserApp parseJSONObject(JSONObject jsonUserApp) throws JSONException {
+  public static UserApp parseJSON(String json) throws JSONException {
+    JSONObject jsonUserApp = getJSONUserApp(json);
     UserApp userApp = new UserApp();
 
     userApp.setName(jsonUserApp.getString("Name"));
@@ -91,6 +93,10 @@ public class UserApp {
     return birthday;
   }
 
+  public String getStringDoB() {
+    return new SimpleDateFormat("yyyy/MM/dd").format(birthday);
+  }
+
   public void setBirthday(Date birthday) {
     this.birthday = birthday;
   }
@@ -101,5 +107,18 @@ public class UserApp {
 
   public void setGender(int gender) {
     this.gender = gender;
+  }
+
+
+  static JSONObject getJSONUserApp(String json) throws JSONException {
+    JSONObject data = new JSONObject(json).getJSONObject("Data");
+
+    try {
+      return data
+          .getJSONArray("UserApps")
+          .getJSONObject(0);
+    } catch (JSONException e) {
+      return data.getJSONObject("UserApp");
+    }
   }
 }

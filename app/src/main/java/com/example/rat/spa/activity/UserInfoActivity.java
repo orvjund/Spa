@@ -38,24 +38,11 @@ public class UserInfoActivity extends AppCompatActivity {
 
   private void loadUserInfo(String json) {
     try {
-      JSONObject jsonUserApp = getJSONUserApp(json);
-      UserApp userApp = UserApp.parseJSONObject(jsonUserApp);
+      UserApp userApp = UserApp.parseJSON(json);
       fillUserInfo(userApp);
     } catch (JSONException e) {
       e.printStackTrace();
       Toast.makeText(this, "Failed to get user info..!", Toast.LENGTH_SHORT).show();
-    }
-  }
-
-  private JSONObject getJSONUserApp(String json) throws JSONException {
-    JSONObject data = new JSONObject(json).getJSONObject("Data");
-
-    try {
-      return data
-          .getJSONArray("UserApps")
-          .getJSONObject(0);
-    } catch (JSONException e) {
-      return data.getJSONObject("UserApp");
     }
   }
 
@@ -66,7 +53,7 @@ public class UserInfoActivity extends AppCompatActivity {
     txtDistrict.setText(userApp.getDistrictName());
     txtAddress.setText(userApp.getAddress());
     txtEmail.setText(userApp.getEmail());
-    txtDob.setText(userApp.getBirthday().toString());
+    txtDob.setText(userApp.getStringDoB());
 
     switch (userApp.getGender()) {
       case 1:

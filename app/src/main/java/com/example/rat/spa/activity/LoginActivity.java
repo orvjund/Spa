@@ -48,7 +48,13 @@ public class LoginActivity extends AppCompatActivity {
     new UserIndexRequest(this, token) {
       @Override
       public void handleResult(String response) {
-        toUserInfoActivity(response);
+//        toStoreListActivity();
+
+//    FIXME: This is pure stupid, just to show UserInfoActivity...!
+        Intent intent = new Intent(getApplicationContext(), UserInfoActivity.class);
+        intent.putExtra("json-user-info", response);
+        startActivity(intent);
+        finish();
       }
 
       @Override
@@ -100,15 +106,14 @@ public class LoginActivity extends AppCompatActivity {
           .getJSONObject("Data")
           .getString("Token");
       saveLoginDetail(token);
-      toUserInfoActivity(response);
+      toStoreListActivity();
     } catch (JSONException e) {
       e.printStackTrace();
     }
   }
 
-  private void toUserInfoActivity(String response) {
-    Intent intent = new Intent(getApplicationContext(), UserInfoActivity.class);
-    intent.putExtra("json-user-info", response);
+  private void toStoreListActivity() {
+    Intent intent = new Intent(getApplicationContext(), StoreListActivity.class);
     startActivity(intent);
     finish();
   }

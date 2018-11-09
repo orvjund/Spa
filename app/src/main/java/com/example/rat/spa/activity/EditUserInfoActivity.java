@@ -14,9 +14,13 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.example.rat.spa.R;
 import com.example.rat.spa.api.AddressesRequest;
+import com.example.rat.spa.api.UserIndexRequest;
 import com.example.rat.spa.model.District;
 import com.example.rat.spa.model.Province;
+import com.example.rat.spa.model.UserApp;
 import com.example.rat.spa.util.SharedPref;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
 
@@ -43,6 +47,50 @@ public class EditUserInfoActivity extends AppCompatActivity {
 
     initViewVariables();
     initSpinners();
+    loadUserInfo();
+  }
+
+  private void loadUserInfo() {
+    new UserIndexRequest(this, SharedPref.getString(this, "token")) {
+      @Override
+      public void handleResult(String result) {
+        try {
+          UserApp userApp = UserApp.parseJSON(result);
+          fillUserInfo(userApp);
+
+        } catch (JSONException e) {
+          Toast.makeText(EditUserInfoActivity.this, "Error: Can't load user information...!", Toast.LENGTH_SHORT).show();
+          e.printStackTrace();
+        }
+      }
+
+      @Override
+      public void handleError(VolleyError error) {
+
+      }
+    };
+  }
+
+  private void fillUserInfo(UserApp userApp) {
+    etName.setText(userApp.getName());
+    etPhone.setText(userApp.getPhone());
+    etAddress.setText(userApp.getAddress());
+    etEmail.setText(userApp.getEmail());
+    etDoB.setText(userApp.getStringDoB());
+
+    switch (userApp.getGender()) {
+      case 1:
+        etGender.setText(R.string.female);
+        break;
+      default:
+        etGender.setText(R.string.male);
+    }
+
+    setCurrentAddress();
+  }
+
+  private void setCurrentAddress() {
+//    TODO: Update spinners
   }
 
   private void initSpinners() {

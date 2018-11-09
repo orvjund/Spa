@@ -23,7 +23,6 @@ public abstract class AddressesRequest extends RequestBase {
   public void handleResult(String result) {
     try {
       ArrayList<Province> provinces = new ArrayList<>();
-      ArrayList<District> districts = new ArrayList<>();
 
       JSONObject data = new JSONObject(result)
           .getJSONObject("Data");
