@@ -25,6 +25,7 @@
         <activity android:name=".activity.EditUserInfoActivity" />
         <activity android:name=".activity.StoreListActivity" />
         <activity android:name=".activity.StoreDetailActivity" />
+        <activity android:name=".activity.HomeActivity"></activity>
     </application>
 
 </manifest>
