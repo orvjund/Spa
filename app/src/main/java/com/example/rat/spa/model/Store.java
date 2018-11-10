@@ -9,5 +9,5 @@ public class Store {
   public String address;
   public String email;
   public String phone;
-  public int rated;
+  public float rating;
 }

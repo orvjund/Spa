@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
     new UserIndexRequest(this, token) {
       @Override
       public void handleResult(String response) {
-        toStoreListActivity();
+        toHomeActivity();
       }
 
       @Override
@@ -100,14 +100,14 @@ public class LoginActivity extends AppCompatActivity {
           .getJSONObject("Data")
           .getString("Token");
       saveLoginDetail(token);
-      toStoreListActivity();
+      toHomeActivity();
     } catch (JSONException e) {
       e.printStackTrace();
     }
   }
 
-  private void toStoreListActivity() {
-    Intent intent = new Intent(getApplicationContext(), StoreListActivity.class);
+  private void toHomeActivity() {
+    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
     startActivity(intent);
     finish();
   }

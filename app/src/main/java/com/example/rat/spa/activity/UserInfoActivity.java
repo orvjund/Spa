@@ -1,5 +1,6 @@
 package com.example.rat.spa.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,7 +8,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.example.rat.spa.R;
+import com.example.rat.spa.api.UserIndexRequest;
 import com.example.rat.spa.model.UserApp;
 import com.example.rat.spa.util.SharedPref;
 
@@ -30,20 +33,28 @@ public class UserInfoActivity extends AppCompatActivity {
     setContentView(R.layout.activity_user_info);
     getSupportActionBar().setTitle("User Info List");
     initViewVariables();
-
-    Intent intent = getIntent();
-    String jsonUserInfo = intent.getStringExtra("json-user-info");
-    loadUserInfo(jsonUserInfo);
+    loadUserInfo();
   }
 
-  private void loadUserInfo(String json) {
-    try {
-      UserApp userApp = UserApp.parseJSON(json);
-      fillUserInfo(userApp);
-    } catch (JSONException e) {
-      e.printStackTrace();
-      Toast.makeText(this, "Failed to get user info..!", Toast.LENGTH_SHORT).show();
-    }
+  private void loadUserInfo() {
+    final Activity thisActivity = this;
+    new UserIndexRequest(this, SharedPref.getToken(this)) {
+      @Override
+      public void handleResult(String result) {
+        try {
+          UserApp userApp = UserApp.parseJSON(result);
+          fillUserInfo(userApp);
+        } catch (JSONException e) {
+          e.printStackTrace();
+          Toast.makeText(thisActivity, "Failed to get user info..!", Toast.LENGTH_SHORT).show();
+        }
+      }
+
+      @Override
+      public void handleError(VolleyError error) {
+        Toast.makeText(thisActivity, "Failed to get user info..!", Toast.LENGTH_SHORT).show();
+      }
+    };
   }
 
   private void fillUserInfo(UserApp userApp) {
@@ -77,12 +88,5 @@ public class UserInfoActivity extends AppCompatActivity {
 
   public void toEditUserInfo(View view) {
     startActivity(new Intent(this, EditUserInfoActivity.class));
-    finish();
-  }
-
-  public void logOut(View view) {
-    SharedPref.delete(this, "token");
-    startActivity(new Intent(this, LoginActivity.class));
-    finish();
   }
 }

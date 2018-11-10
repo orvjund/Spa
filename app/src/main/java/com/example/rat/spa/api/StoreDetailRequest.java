@@ -6,59 +6,61 @@ import com.android.volley.VolleyError;
 import com.example.rat.spa.model.Store;
 import com.example.rat.spa.util.SpaURL;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
-public abstract class StoreListRequest extends RequestBase {
-  String token;
+public abstract class StoreDetailRequest extends RequestBase {
+  private String token;
+  private int storeId;
+  private Context context;
 
-  public StoreListRequest(Context context, String token) {
+  public StoreDetailRequest(Context context, String token, int storeId) {
     super(context);
+    this.context = context;
     this.token = token;
+    this.storeId = storeId;
     request();
   }
 
   private void request() {
     HashMap<String, String> params = new HashMap<>();
     params.put("Token", token);
-    POST(SpaURL.STORE_INDEX, params);
+    params.put("ID", Integer.toString(storeId));
+    POST(SpaURL.STORE_DETAIL, params);
   }
 
   @Override
   public void handleResult(String result) {
     try {
-      ArrayList<Store> stores = new ArrayList<>();
-      JSONArray storesJSON = new JSONObject(result)
+      JSONObject storeJSON = new JSONObject(result)
           .getJSONObject("Data")
-          .getJSONArray("UserStores");
+          .getJSONObject("UserStore");
 
-      for (int i = 0; i < storesJSON.length(); i++) {
-        JSONObject storeJSON = storesJSON.getJSONObject(i);
-
+      int storeId = storeJSON.getInt("IDStore");
+      if (storeId == this.storeId) {
         Store store = new Store();
-        store.storeId = storeJSON.getInt("IDStore");
+        store.storeId = storeId;
         store.name = storeJSON.getString("Name");
         store.describe = storeJSON.getString("Describe");
-        store.rating = storeJSON.getInt("Rated");
+        store.rating = (float) new JSONObject(result)
+            .getJSONObject("Data")
+            .getDouble("Rating");
         store.provinceName = storeJSON.getString("ProvinceName");
         store.districtName = storeJSON.getString("DistrictName");
         store.address = storeJSON.getString("Address");
         store.email = storeJSON.getString("Email");
         store.phone = storeJSON.getString("Phone");
 
-        stores.add(store);
+        handleStores(store);
       }
 
-      handleStores(stores);
     } catch (JSONException e) {
       e.printStackTrace();
       handleError(new VolleyError(e));
     }
   }
 
-  public abstract void handleStores(ArrayList<Store> stores);
+  public abstract void handleStores(Store store);
 }

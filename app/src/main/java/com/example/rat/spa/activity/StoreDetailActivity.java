@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.example.rat.spa.R;
 import com.example.rat.spa.api.RateStoreRequest;
-import com.example.rat.spa.api.StoreByIdRequest;
+import com.example.rat.spa.api.StoreDetailRequest;
 import com.example.rat.spa.model.Store;
 import com.example.rat.spa.util.SharedPref;
 
@@ -45,6 +45,7 @@ public class StoreDetailActivity extends AppCompatActivity {
           @Override
           public void handleResult(String result) {
             Toast.makeText(StoreDetailActivity.this, "Rated...!", Toast.LENGTH_SHORT).show();
+            loadStoreDetail();
           }
 
           @Override
@@ -67,7 +68,7 @@ public class StoreDetailActivity extends AppCompatActivity {
   }
 
   private void loadStoreDetail() {
-    new StoreByIdRequest(this, SharedPref.getToken(this), this.storeId) {
+    new StoreDetailRequest(this, SharedPref.getToken(this), this.storeId) {
       @Override
       public void handleError(VolleyError error) {
         error.printStackTrace();
@@ -83,7 +84,7 @@ public class StoreDetailActivity extends AppCompatActivity {
 
   private void fillDetailToViews(Store store) {
     txtStoreName.setText(store.name);
-    rating.setRating(store.rated);
+    rating.setRating(store.rating);
     txtAddress.setText(store.address);
   }
 }

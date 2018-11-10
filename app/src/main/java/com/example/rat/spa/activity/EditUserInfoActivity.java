@@ -7,8 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
@@ -32,10 +35,11 @@ public class EditUserInfoActivity extends AppCompatActivity {
   EditText etAddress;
   EditText etEmail;
   EditText etDoB;
-  EditText etGender;
+  TextView txtGender;
   EditText etOldPassword;
   EditText etNewPassword;
   EditText etRetypePassword;
+  CheckBox cbChangePassword;
   int currentProvinceId = -1;
 
   @Override
@@ -46,8 +50,19 @@ public class EditUserInfoActivity extends AppCompatActivity {
     getSupportActionBar().setTitle("Edit User Info");
 
     initViewVariables();
+    initCheckbox();
     initSpinners();
     loadUserInfo();
+  }
+
+  private void initCheckbox() {
+    cbChangePassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+      @Override
+      public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        etNewPassword.setEnabled(isChecked);
+        etRetypePassword.setEnabled(isChecked);
+      }
+    });
   }
 
   private void loadUserInfo() {
@@ -80,10 +95,10 @@ public class EditUserInfoActivity extends AppCompatActivity {
 
     switch (userApp.getGender()) {
       case 1:
-        etGender.setText(R.string.female);
+        txtGender.setText(R.string.female);
         break;
       default:
-        etGender.setText(R.string.male);
+        txtGender.setText(R.string.male);
     }
 
     setCurrentAddress();
@@ -151,14 +166,14 @@ public class EditUserInfoActivity extends AppCompatActivity {
     etAddress = findViewById(R.id.et_address);
     etEmail = findViewById(R.id.et_email);
     etDoB = findViewById(R.id.et_dob);
-    etGender = findViewById(R.id.et_gender);
+    txtGender = findViewById(R.id.et_gender);
     etOldPassword = findViewById(R.id.et_old_password);
     etNewPassword = findViewById(R.id.et_new_password);
     etRetypePassword = findViewById(R.id.et_retype);
+    cbChangePassword = findViewById(R.id.cb_change_password);
   }
 
   public void updateUserInfo(View view) {
-//    TODO: Handle info editing...! :"}
     String token = SharedPref.getToken(this);
   }
 
@@ -168,15 +183,15 @@ public class EditUserInfoActivity extends AppCompatActivity {
         .setPositiveButton("Male", new DialogInterface.OnClickListener() {
           @Override
           public void onClick(DialogInterface dialog, int which) {
-            Toast.makeText(EditUserInfoActivity.this, Integer.toString(which), Toast.LENGTH_SHORT).show();
+            txtGender.setText("Male");
           }
         })
         .setNegativeButton("Female", new DialogInterface.OnClickListener() {
           @Override
           public void onClick(DialogInterface dialog, int which) {
-            Toast.makeText(EditUserInfoActivity.this, Integer.toString(which), Toast.LENGTH_SHORT).show();
+            txtGender.setText("Female");
           }
         });
-    builder.create();
+    builder.create().show();
   }
 }
