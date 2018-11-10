@@ -1,6 +1,8 @@
 package com.example.rat.spa.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +21,7 @@ public class HomeActivity extends AppCompatActivity {
     setContentView(R.layout.activity_home);
     constraintLayout = findViewById(R.id.home_layout);
     constraintLayout.setBackgroundResource(R.color.colorHome);
+    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#A60F18")));
   }
 
   public void logOut(View view) {
