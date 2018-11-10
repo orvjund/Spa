@@ -8,19 +8,19 @@
   tools:context=".activity.HomeActivity">
 
   <ImageView
-    android:id="@+id/imageView4"
-    android:layout_width="430dp"
-    android:layout_height="165dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginBottom="8dp"
-    android:foregroundGravity="center"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.425"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.0"
-    tools:srcCompat="@drawable/spa_home" />
+      android:id="@+id/imageView4"
+      android:layout_width="430dp"
+      android:layout_height="165dp"
+      android:layout_marginEnd="8dp"
+      android:layout_marginBottom="8dp"
+      android:foregroundGravity="center"
+      android:src="@drawable/spa_home"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.259"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.0" />
 
   <Button
     android:id="@+id/button"
