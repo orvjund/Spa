@@ -13,16 +13,13 @@ import com.example.rat.spa.R;
 import com.example.rat.spa.util.SharedPref;
 
 public class HomeActivity extends AppCompatActivity {
-  ConstraintLayout constraintLayout;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_home);
-    constraintLayout = findViewById(R.id.home_layout);
-    constraintLayout.setBackgroundResource(R.color.colorHome);
-    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#A60F18")));
-  }
+    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#241E4E")));
+}
 
   public void logOut(View view) {
     SharedPref.delete(this, "token");
