@@ -11,4 +11,8 @@
         <item name="android:textSize">10dp</item>
         <item name="android:textAllCaps">true</item>
     </style>
+    <style name="TabLayoutStyle1" parent="Base.Widget.Design.TabLayout">
+        <item name="android:textSize">9dp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
 </resources>
