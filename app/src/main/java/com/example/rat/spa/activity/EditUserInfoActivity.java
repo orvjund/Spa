@@ -1,6 +1,7 @@
 package com.example.rat.spa.activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.example.rat.spa.R;
 import com.example.rat.spa.api.AddressesRequest;
 import com.example.rat.spa.api.UserIndexRequest;
+import com.example.rat.spa.api.UserUpdateRequest;
 import com.example.rat.spa.model.District;
 import com.example.rat.spa.model.Province;
 import com.example.rat.spa.model.UserApp;
@@ -25,7 +27,10 @@ import com.example.rat.spa.util.SharedPref;
 
 import org.json.JSONException;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class EditUserInfoActivity extends AppCompatActivity {
   EditText etName;
@@ -41,6 +46,8 @@ public class EditUserInfoActivity extends AppCompatActivity {
   EditText etRetypePassword;
   CheckBox cbChangePassword;
   int currentProvinceId = -1;
+  int currentDistrictId = -1;
+  int userId;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +78,7 @@ public class EditUserInfoActivity extends AppCompatActivity {
       public void handleResult(String result) {
         try {
           UserApp userApp = UserApp.parseJSON(result);
+          userId = userApp.getUserId();
           fillUserInfo(userApp);
 
         } catch (JSONException e) {
@@ -100,12 +108,6 @@ public class EditUserInfoActivity extends AppCompatActivity {
       default:
         txtGender.setText(R.string.male);
     }
-
-    setCurrentAddress();
-  }
-
-  private void setCurrentAddress() {
-//    TODO: Update spinners
   }
 
   private void initSpinners() {
@@ -134,7 +136,7 @@ public class EditUserInfoActivity extends AppCompatActivity {
     };
   }
 
-  private void setDistrictSpinnerAdapter(ArrayList<District> districts) {
+  private void setDistrictSpinnerAdapter(final ArrayList<District> districts) {
     ArrayList<String> districtNames = new ArrayList<>();
     for (District district : districts) {
       districtNames.add(district.getName());
@@ -143,6 +145,16 @@ public class EditUserInfoActivity extends AppCompatActivity {
         R.layout.simple_spinner_item,
         districtNames);
     spinnerDistrict.setAdapter(spinnerAdapter);
+    spinnerDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+      @Override
+      public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        currentDistrictId = districts.get(position).getId();
+      }
+
+      @Override
+      public void onNothingSelected(AdapterView<?> parent) {
+      }
+    });
     spinnerDistrict.setSelection(0, true);
   }
 
@@ -174,7 +186,50 @@ public class EditUserInfoActivity extends AppCompatActivity {
   }
 
   public void updateUserInfo(View view) {
-    String token = SharedPref.getToken(this);
+    String oldPassword = etOldPassword.getText().toString();
+    if (oldPassword.length() == 0) {
+      Toast.makeText(this, "Enter current password...!", Toast.LENGTH_SHORT).show();
+      return;
+    }
+    String name = etName.getText().toString();
+    String phone = etPhone.getText().toString();
+    int provinceId = currentProvinceId;
+    int districtId = currentDistrictId;
+    String address = etAddress.getText().toString();
+    String email = etEmail.getText().toString();
+    Date dob;
+    try {
+      dob = new SimpleDateFormat("yyyy/MM/dd").parse(etDoB.getText().toString());
+    } catch (ParseException e) {
+      e.printStackTrace();
+      Toast.makeText(this, "Invalid birthday...!", Toast.LENGTH_SHORT).show();
+      return;
+    }
+    int gender = txtGender.getText().toString().equals("Make") ? 1 : 2;
+
+    UserApp userApp = new UserApp(userId, name, phone, provinceId, districtId, address, email, dob, gender);
+    new UserUpdateRequest(this, SharedPref.getToken(this), userApp, oldPassword) {
+      @Override
+      public void handleResult(String result) {
+        Toast.makeText(EditUserInfoActivity.this, "Updated...!", Toast.LENGTH_SHORT).show();
+        startUserInfoActivity();
+      }
+
+      @Override
+      public void handleError(VolleyError error) {
+        error.printStackTrace();
+        Toast.makeText(EditUserInfoActivity.this, "Error updating profile...!", Toast.LENGTH_SHORT).show();
+      }
+    };
+
+    //FIXME: Update password
+    String newPassword = etNewPassword.getText().toString();
+    String retypePassword = etRetypePassword.getText().toString();
+  }
+
+  private void startUserInfoActivity() {
+    startActivity(new Intent(this, UserInfoActivity.class));
+    finish();
   }
 
   public void selectGender(View view) {

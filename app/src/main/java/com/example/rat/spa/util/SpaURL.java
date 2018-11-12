@@ -6,6 +6,7 @@ public class SpaURL {
   public static final String USER_LOGIN = SERVER_ENTRY + "account/login";
   public static final String GET_ADDRESS = SERVER_ENTRY + "account/getaddress";
   public static final String ACCOUNT_LOGOUT = SERVER_ENTRY + "account/Logout";
+  public static final String USER_UPDATE = SERVER_ENTRY + "user/update";
   public static final String STORE_INDEX = SERVER_ENTRY + "store/index";
   public static final String STORE_DETAIL = SERVER_ENTRY + "store/detail";
   public static final String STORE_RATE = SERVER_ENTRY + "store/rate";
