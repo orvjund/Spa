@@ -10,4 +10,8 @@ public class SpaURL {
   public static final String STORE_INDEX = SERVER_ENTRY + "store/index";
   public static final String STORE_DETAIL = SERVER_ENTRY + "store/detail";
   public static final String STORE_RATE = SERVER_ENTRY + "store/rate";
+  // lấy danh sách cửa hàng được sắp xếp theo vị trí người dùng
+  public static final String ORDER_GETSTORE = SERVER_ENTRY + "account/GetStoreToOrder";
+  // khi click vào cửa hàng thì gửi lên IDStore: id để lấy danh sách dịch vụ của cửa hàng đó
+  public static final String ORDER_GETSERVICE = SERVER_ENTRY + "manager/services";
 }
