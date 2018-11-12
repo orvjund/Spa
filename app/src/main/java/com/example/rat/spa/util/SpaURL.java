@@ -14,4 +14,8 @@ public class SpaURL {
   public static final String ORDER_GETSTORE = SERVER_ENTRY + "account/GetStoreToOrder";
   // khi click vào cửa hàng thì gửi lên IDStore: id để lấy danh sách dịch vụ của cửa hàng đó
   public static final String ORDER_GETSERVICE = SERVER_ENTRY + "manager/services";
+  // danh sách các lịch đặt
+  public static final String ORDER_INDEX = SERVER_ENTRY + "order/index";
+  // khi ấn nút đặt lịch
+  public static final String ORDER_CREATE= SERVER_ENTRY + "order/create";
 }
