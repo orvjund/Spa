@@ -7,7 +7,6 @@ import com.example.rat.spa.model.Store;
 import com.example.rat.spa.util.SpaURL;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 
@@ -34,27 +33,10 @@ public abstract class StoreDetailRequest extends RequestBase {
   @Override
   public void handleResult(String result) {
     try {
-      JSONObject storeJSON = new JSONObject(result)
-          .getJSONObject("Data")
-          .getJSONObject("UserStore");
 
-      int storeId = storeJSON.getInt("IDStore");
-      if (storeId == this.storeId) {
-        Store store = new Store();
-        store.storeId = storeId;
-        store.name = storeJSON.getString("Name");
-        store.describe = storeJSON.getString("Describe");
-        store.rating = (float) new JSONObject(result)
-            .getJSONObject("Data")
-            .getDouble("Rating");
-        store.provinceName = storeJSON.getString("ProvinceName");
-        store.districtName = storeJSON.getString("DistrictName");
-        store.address = storeJSON.getString("Address");
-        store.email = storeJSON.getString("Email");
-        store.phone = storeJSON.getString("Phone");
+      Store store = Store.parseJSON(result);
 
-        handleStores(store);
-      }
+      handleStore(store);
 
     } catch (JSONException e) {
       e.printStackTrace();
@@ -62,5 +44,5 @@ public abstract class StoreDetailRequest extends RequestBase {
     }
   }
 
-  public abstract void handleStores(Store store);
+  public abstract void handleStore(Store store);
 }
