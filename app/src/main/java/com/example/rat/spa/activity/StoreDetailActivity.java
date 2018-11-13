@@ -1,9 +1,11 @@
 package com.example.rat.spa.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RatingBar;
@@ -140,5 +142,12 @@ public class StoreDetailActivity extends AppCompatActivity {
 
   private void loadPromotions(ArrayList<Promotion> promotions) {
     lvTabLayout.setAdapter(new StorePromotionAdapter(this, promotions));
+  }
+
+  public void toBookingActivity(View view) {
+    Intent intent = new Intent(this, BookingActivity.class);
+    intent.putExtra("store-id", this.storeId);
+    startActivity(intent);
+    finish();
   }
 }
