@@ -9,27 +9,28 @@ import android.widget.TextView;
 
 import com.example.rat.spa.R;
 import com.example.rat.spa.activity.StoreDetailActivity;
+import com.example.rat.spa.model.Category;
 import com.example.rat.spa.model.Promotion;
 import com.example.rat.spa.model.Store;
 
 import java.util.ArrayList;
 
-public class StorePromotionAdapter extends BaseAdapter {
-  ArrayList<Promotion> promotions;
+public class StoreCategoryAdapter extends BaseAdapter {
+  ArrayList<Category> categories;
   Activity activity;
-  public StorePromotionAdapter(Activity activity, ArrayList<Promotion> promotions) {
+  public StoreCategoryAdapter(Activity activity, ArrayList<Category> categories) {
     this.activity = activity;
-    this.promotions = promotions;
+    this.categories = categories;
   }
 
   @Override
   public int getCount() {
-    return promotions.size();
+    return categories.size();
   }
 
   @Override
   public Object getItem(int position) {
-    return promotions.get(position);
+    return categories.get(position);
   }
 
   @Override
@@ -42,24 +43,20 @@ public class StorePromotionAdapter extends BaseAdapter {
 
     MyHolder myHolder;
     if(convertView == null) {
-      convertView = activity.getLayoutInflater().inflate(R.layout.store_detail_tabview_promotin_layout, null);
+      convertView = activity.getLayoutInflater().inflate(R.layout.store_service_name_layout, null);
       myHolder = new MyHolder();
-      myHolder.txtPromotionDescription = convertView.findViewById(R.id.txt_promotion_describe);
-      myHolder.txtPromotionTime = convertView.findViewById(R.id.txt_promotion_time);
+      myHolder.txtServiceName = convertView.findViewById(R.id.txt_service_name);
       convertView.setTag(myHolder);
     } else {
       myHolder = (MyHolder)convertView.getTag();
     }
 
-    final Promotion promotion = promotions.get(position);
-    myHolder.txtPromotionDescription.setText(promotion.getDescribe());
-    myHolder.txtPromotionTime.setText(promotion.getFormattedTime());
+    myHolder.txtServiceName.setText(categories.get(position).getName());
 
     return convertView;
   }
 
   class MyHolder {
-    TextView txtPromotionDescription;
-    TextView txtPromotionTime;
+    TextView txtServiceName;
   }
 }

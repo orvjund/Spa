@@ -1,6 +1,7 @@
 package com.example.rat.spa.activity;
 
 import android.app.Activity;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -11,9 +12,11 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.rat.spa.R;
+import com.example.rat.spa.adapter.StoreCategoryAdapter;
 import com.example.rat.spa.adapter.StorePromotionAdapter;
 import com.example.rat.spa.api.RateStoreRequest;
 import com.example.rat.spa.api.StoreDetailRequest;
+import com.example.rat.spa.model.Category;
 import com.example.rat.spa.model.Promotion;
 import com.example.rat.spa.model.Store;
 import com.example.rat.spa.util.SharedPref;
@@ -26,7 +29,8 @@ public class StoreDetailActivity extends AppCompatActivity {
   RatingBar rating;
   RatingBar myRating;
   TextView txtAddress;
-  ListView lvTabview;
+  ListView lvTabLayout;
+  TabLayout tabLayout;
   int storeId;
 
   @Override
@@ -65,7 +69,8 @@ public class StoreDetailActivity extends AppCompatActivity {
   }
 
   private void initViewVariables() {
-    lvTabview = findViewById(R.id.list_tabview);
+    tabLayout = findViewById(R.id.tab_layout);
+    lvTabLayout = findViewById(R.id.list_tabview);
     txtStoreName = findViewById(R.id.txt_store_name);
     btnBook = findViewById(R.id.btn_book);
     rating = findViewById(R.id.rating);
@@ -94,10 +99,46 @@ public class StoreDetailActivity extends AppCompatActivity {
     txtStoreName.setText(store.name);
     rating.setRating(store.rating);
     txtAddress.setText(store.address);
+    initTabLayout(store);
     loadPromotions(store.promotions);
   }
 
+  private void initTabLayout(final Store store) {
+    tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+      @Override
+      public void onTabSelected(TabLayout.Tab tab) {
+        int index = tab.getPosition();
+        switch (index) {
+          case 0:
+            loadPromotions(store.promotions);
+            break;
+          case 1:
+            loadServices(store.categories);
+            break;
+          case 2:
+            break;
+          case 3:
+            break;
+        }
+      }
+
+      @Override
+      public void onTabUnselected(TabLayout.Tab tab) {
+
+      }
+
+      @Override
+      public void onTabReselected(TabLayout.Tab tab) {
+
+      }
+    });
+  }
+
+  private void loadServices(ArrayList<Category> categories) {
+    lvTabLayout.setAdapter(new StoreCategoryAdapter(this, categories));
+  }
+
   private void loadPromotions(ArrayList<Promotion> promotions) {
-    lvTabview.setAdapter(new StorePromotionAdapter(this, promotions));
+    lvTabLayout.setAdapter(new StorePromotionAdapter(this, promotions));
   }
 }

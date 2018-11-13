@@ -18,11 +18,12 @@ public class Store {
   public String phone;
   public float rating;
   public ArrayList<Promotion> promotions;
+  public ArrayList<Category> categories;
 
   public static Store parseJSON(String json) throws JSONException {
     Store store = new Store();
 
-    store.rating = getRating(json);
+    store.rating = parseRating(json);
 
     JSONObject storeJSON = new JSONObject(json)
         .getJSONObject("Data")
@@ -36,12 +37,34 @@ public class Store {
     store.email = storeJSON.getString("Email");
     store.phone = storeJSON.getString("Phone");
 
-    store.promotions = getPromotions(json);
+    store.promotions = parsePromotions(json);
+    store.categories = parseCategories(json);
 
     return store;
   }
 
-  private static ArrayList<Promotion> getPromotions(String json) throws JSONException {
+  private static ArrayList<Category> parseCategories(String json) throws JSONException {
+    ArrayList<Category> categories = new ArrayList<>();
+    JSONArray jsonCategories = new JSONObject(json)
+        .getJSONObject("Data")
+        .getJSONObject("UserStore")
+        .getJSONArray("Categories");
+
+    for (int i = 0; i < jsonCategories.length(); i++) {
+      JSONObject jsonCategory = jsonCategories.getJSONObject(i);
+      int categoryId = jsonCategory.getInt("ID");
+      String name = jsonCategory.getString("Name");
+      int hour = jsonCategory.getInt("Hour");
+      String describe = jsonCategory.getString("Describe");
+      int minute = jsonCategory.getInt("Minute");
+      float price = (float) jsonCategory.getDouble("Price");
+      categories.add(new Category(categoryId, name, describe, hour, minute, price));
+    }
+
+    return categories;
+  }
+
+  private static ArrayList<Promotion> parsePromotions(String json) throws JSONException {
     ArrayList<Promotion> promotions = new ArrayList<>();
     JSONArray jsonPromotions = new JSONObject(json)
         .getJSONObject("Data")
@@ -58,7 +81,7 @@ public class Store {
     return promotions;
   }
 
-  private static float getRating(String json) throws JSONException {
+  private static float parseRating(String json) throws JSONException {
     return (float) new JSONObject(json)
         .getJSONObject("Data")
         .getDouble("Rating");

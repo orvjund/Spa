@@ -188,7 +188,7 @@
   </android.support.v7.widget.CardView>
 
   <android.support.design.widget.TabLayout
-    android:id="@+id/tabLayout"
+    android:id="@+id/tab_layout"
     android:layout_width="368dp"
     android:layout_height="24dp"
     android:layout_marginStart="8dp"
