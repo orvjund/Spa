@@ -40,4 +40,9 @@ public class HomeActivity extends AppCompatActivity {
   public void toNotification(View view) {
     Toast.makeText(this, "This function isn't implemented yet...!", Toast.LENGTH_SHORT).show();
   }
+
+  public void toBookingListActivity(View view) {
+    Intent intent = new Intent(getApplicationContext(), BookingListActivity.class);
+    startActivity(intent);
+  }
 }

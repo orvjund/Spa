@@ -5,20 +5,18 @@ public class SpaURL {
   public static final String USER_INDEX = SERVER_ENTRY + "user/index";
   public static final String USER_LOGIN = SERVER_ENTRY + "account/login";
   public static final String GET_ADDRESS = SERVER_ENTRY + "account/getaddress";
-  public static final String ACCOUNT_LOGOUT = SERVER_ENTRY + "account/Logout";
   public static final String USER_UPDATE = SERVER_ENTRY + "user/update";
   public static final String STORE_INDEX = SERVER_ENTRY + "store/index";
   public static final String STORE_DETAIL = SERVER_ENTRY + "store/detail";
   public static final String STORE_RATE = SERVER_ENTRY + "store/rate";
+  public static final String ORDER_CREATE = SERVER_ENTRY + "order/create";
+  public static final String ORDER_INDEX = SERVER_ENTRY + "order/index";
+  public static final String ACCOUNT_LOGOUT = SERVER_ENTRY + "account/Logout";
   // lấy danh sách cửa hàng được sắp xếp theo vị trí người dùng
   public static final String ORDER_GETSTORE = SERVER_ENTRY + "account/GetStoreToOrder";
   // khi click vào cửa hàng thì gửi lên IDStore: id để lấy danh sách dịch vụ của cửa hàng đó
   public static final String ORDER_GETSERVICE = SERVER_ENTRY + "manager/services";
-  // danh sách các lịch đặt
-  public static final String ORDER_INDEX = SERVER_ENTRY + "order/index";
-  // khi ấn nút đặt lịch
-  public static final String ORDER_CREATE= SERVER_ENTRY + "order/create";
   // xét quyền isCancel, nếu bằng true thì hiện buton hủy lên, ấn vào thì call vào api này
-  public static final String ORDER_CREATE= SERVER_ENTRY + "order/Cancel";
-  
+  public static final String ORDER_CANCEL = SERVER_ENTRY + "order/Cancel";
+
 }

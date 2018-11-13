@@ -26,7 +26,8 @@
         <activity android:name=".activity.StoreListActivity" />
         <activity android:name=".activity.StoreDetailActivity" />
         <activity android:name=".activity.HomeActivity" />
-        <activity android:name=".activity.BookingActivity"></activity>
+        <activity android:name=".activity.BookingActivity" />
+        <activity android:name=".activity.BookingListActivity" />
     </application>
 
 </manifest>

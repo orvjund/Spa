@@ -7,7 +7,7 @@
   tools:context=".activity.BookingListActivity">
 
   <android.support.design.widget.TabLayout
-    android:id="@+id/tabLayout2"
+    android:id="@+id/booking_list_tab_layout"
     android:layout_width="0dp"
     android:layout_height="86dp"
     android:layout_marginStart="8dp"
@@ -23,14 +23,12 @@
     app:tabTextColor="?attr/colorButtonNormal">
 
     <android.support.design.widget.TabItem
-      android:onClick="loadUnconfirmedOrders"
       android:id="@+id/unconfirmed_tab_item"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="unconfirmed" />
 
     <android.support.design.widget.TabItem
-      android:onClick="loadConfirmedOrders"
       android:id="@+id/confirmed_tab_item"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
