@@ -49,7 +49,7 @@ public abstract class OrderIndexRequest extends RequestBase {
         order.status = orderJSON.getInt("Status");
 //        order.name = orderJSON.getString("Name");
         order.describe = orderJSON.getString("Describe");
-        order.onDate = SpaUtil.getFormattedDateTime(new Date(orderJSON.getLong("OnDate")));
+        order.onDate = SpaUtil.getFormattedDate(new Date(orderJSON.getLong("OnDate")));
         order.idStore = orderJSON.getInt("StoreID");
         order.storeName = orderJSON.getString("StoreName");
         order.userName = orderJSON

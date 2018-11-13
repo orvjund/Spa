@@ -45,4 +45,8 @@ public class HomeActivity extends AppCompatActivity {
     Intent intent = new Intent(getApplicationContext(), BookingListActivity.class);
     startActivity(intent);
   }
+
+  public void handleBookingButton(View view) {
+    Toast.makeText(this, "This function isn't implemented yet...!", Toast.LENGTH_SHORT).show();
+  }
 }

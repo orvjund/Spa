@@ -8,7 +8,7 @@ public class SpaUtil {
     return new SimpleDateFormat("yyyy/MM/dd").format(date);
   }
 
-  public static String getFormattedDateTime(Date date) {
-    return new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(date);
-  }
+//  public static String getFormattedDateTime(Date date) {
+//    return new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(date);
+//  }
 }
