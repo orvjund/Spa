@@ -15,11 +15,15 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.example.rat.spa.R;
 import com.example.rat.spa.adapter.StoreCategoryAdapter;
+import com.example.rat.spa.adapter.StoreDiscussAdapter;
 import com.example.rat.spa.adapter.StorePromotionAdapter;
+import com.example.rat.spa.adapter.StoreRatingAdapter;
 import com.example.rat.spa.api.RateStoreRequest;
 import com.example.rat.spa.api.StoreDetailRequest;
 import com.example.rat.spa.model.Category;
+import com.example.rat.spa.model.Discuss;
 import com.example.rat.spa.model.Promotion;
+import com.example.rat.spa.model.Rating;
 import com.example.rat.spa.model.Store;
 import com.example.rat.spa.util.SharedPref;
 
@@ -100,8 +104,9 @@ public class StoreDetailActivity extends AppCompatActivity {
   private void fillDetailToViews(Store store) {
     txtStoreName.setText(store.name);
     rating.setRating(store.rating);
-    txtAddress.setText(store.address);
+    txtAddress.setText(store.getFullAddress());
     initTabLayout(store);
+    tabLayout.getTabAt(0).select();
     loadPromotions(store.promotions);
   }
 
@@ -118,8 +123,10 @@ public class StoreDetailActivity extends AppCompatActivity {
             loadServices(store.categories);
             break;
           case 2:
+            loadDiscussion(store.discusses);
             break;
           case 3:
+            loadRatings(store.ratings);
             break;
         }
       }
@@ -134,6 +141,14 @@ public class StoreDetailActivity extends AppCompatActivity {
 
       }
     });
+  }
+
+  private void loadRatings(ArrayList<Rating> ratings) {
+    lvTabLayout.setAdapter(new StoreRatingAdapter(this, ratings));
+  }
+
+  private void loadDiscussion(ArrayList<Discuss> discusses) {
+    lvTabLayout.setAdapter(new StoreDiscussAdapter(this, discusses));
   }
 
   private void loadServices(ArrayList<Category> categories) {

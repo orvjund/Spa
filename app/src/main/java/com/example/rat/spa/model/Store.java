@@ -19,6 +19,8 @@ public class Store {
   public float rating;
   public ArrayList<Promotion> promotions;
   public ArrayList<Category> categories;
+  public ArrayList<Discuss> discusses;
+  public ArrayList<Rating> ratings;
 
   public static Store parseJSON(String json) throws JSONException {
     Store store = new Store();
@@ -39,8 +41,49 @@ public class Store {
 
     store.promotions = parsePromotions(json);
     store.categories = parseCategories(json);
+    store.discusses = parseDiscusses(json);
+    store.ratings = parseRatings(json);
 
     return store;
+  }
+
+  private static ArrayList<Rating> parseRatings(String json) throws JSONException {
+    ArrayList<Rating> ratings = new ArrayList<>();
+    JSONArray jsonRatings = new JSONObject(json)
+        .getJSONObject("Data")
+        .getJSONArray("Ratings");
+
+    for (int i = 0; i < jsonRatings.length(); i++) {
+      JSONObject jsonRating = jsonRatings.getJSONObject(i);
+      Rating rating = new Rating();
+      rating.id = jsonRating.getInt("ID");
+      rating.rate = (float) jsonRating.getDouble("Rate");
+      rating.content = jsonRating.getString("Note");
+      rating.created = new Date(jsonRating.getLong("Created"));
+      rating.createdByName = jsonRating.getString("CreatedByName");
+      ratings.add(rating);
+    }
+
+    return ratings;
+  }
+
+  private static ArrayList<Discuss> parseDiscusses(String json) throws JSONException {
+    ArrayList<Discuss> discusses = new ArrayList<>();
+    JSONArray jsonDiscusses = new JSONObject(json)
+        .getJSONObject("Data")
+        .getJSONArray("Discusses");
+
+    for (int i = 0; i < jsonDiscusses.length(); i++) {
+      JSONObject jsonDiscuss = jsonDiscusses.getJSONObject(i);
+      Discuss discuss = new Discuss();
+      discuss.id = jsonDiscuss.getInt("ID");
+      discuss.body = jsonDiscuss.getString("Body");
+      discuss.created = new Date(jsonDiscuss.getLong("Created"));
+      discuss.createdByName = jsonDiscuss.getString("CreatedByName");
+      discusses.add(discuss);
+    }
+
+    return discusses;
   }
 
   private static ArrayList<Category> parseCategories(String json) throws JSONException {
@@ -85,5 +128,9 @@ public class Store {
     return (float) new JSONObject(json)
         .getJSONObject("Data")
         .getDouble("Rating");
+  }
+
+  public String getFullAddress() {
+    return address + ", " + districtName + " - " + provinceName;
   }
 }

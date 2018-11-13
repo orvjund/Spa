@@ -12,12 +12,12 @@
         android:layout_weight="1" />
 
     <TextView
-        android:id="@+id/txt_content"
-        android:layout_gravity="center"
-        android:drawableLeft="@drawable/ic_action_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
+      android:id="@+id/txt_content"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:layout_weight="1"
+      android:drawableLeft="@drawable/ic_action_info" />
 
     <TextView
         android:id="@+id/txt_time"
@@ -27,16 +27,16 @@
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 
-    <EditText
-        android:id="@+id/et_comment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:paddingLeft="20dp"
-        android:background="@drawable/custom_edit_text"
-        android:drawableRight="@drawable/ic_action_send"
-        android:ems="10"
-        android:hint="Enter comment"
-        android:inputType="textPersonName" />
+    <!--<EditText-->
+        <!--android:id="@+id/et_comment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:paddingLeft="20dp"-->
+        <!--android:background="@drawable/custom_edit_text"-->
+        <!--android:drawableRight="@drawable/ic_action_send"-->
+        <!--android:ems="10"-->
+        <!--android:hint="Enter comment"-->
+        <!--android:inputType="textPersonName" />-->
 
 </LinearLayout>
