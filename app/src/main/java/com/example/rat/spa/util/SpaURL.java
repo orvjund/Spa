@@ -18,4 +18,7 @@ public class SpaURL {
   public static final String ORDER_INDEX = SERVER_ENTRY + "order/index";
   // khi ấn nút đặt lịch
   public static final String ORDER_CREATE= SERVER_ENTRY + "order/create";
+  // xét quyền isCancel, nếu bằng true thì hiện buton hủy lên, ấn vào thì call vào api này
+  public static final String ORDER_CREATE= SERVER_ENTRY + "order/Cancel";
+  
 }
