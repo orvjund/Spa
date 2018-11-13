@@ -265,6 +265,7 @@
     android:layout_marginTop="8dp"
     android:layout_marginBottom="4dp"
     android:onClick="updateUserInfo"
+      android:background="@drawable/button_default"
     android:text="@string/update_info"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
