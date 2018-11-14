@@ -207,13 +207,10 @@
     android:layout_marginStart="8dp"
     android:layout_marginTop="8dp"
     android:layout_marginEnd="8dp"
-    android:layout_marginBottom="8dp"
-    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="1.0"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.547"
+    app:layout_constraintTop_toBottomOf="@+id/cardView"
     app:tabIndicatorColor="@color/design_default_color_primary"
     app:tabSelectedTextColor="@color/colorPrimary"
     app:tabTextAppearance="@style/TabLayoutStyle"
@@ -243,7 +240,7 @@
   <ListView
     android:id="@+id/list_tabview"
     android:layout_width="368dp"
-    android:layout_height="213dp"
+    android:layout_height="0dp"
     android:layout_marginStart="8dp"
     android:layout_marginTop="8dp"
     android:layout_marginEnd="8dp"
@@ -252,8 +249,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.0"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="1.0" />
+    app:layout_constraintTop_toBottomOf="@+id/tab_layout" />
 
 </android.support.constraint.ConstraintLayout>
 

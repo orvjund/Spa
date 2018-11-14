@@ -1,12 +1,16 @@
 package com.example.rat.spa.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -44,7 +48,7 @@ public class StoreDetailActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_store_detail);
-    getSupportActionBar().setTitle("Store List Detail");
+    getSupportActionBar().setTitle("Store Detail");
 
     this.storeId = getIntent().getIntExtra("store-id", -1);
 
@@ -57,20 +61,46 @@ public class StoreDetailActivity extends AppCompatActivity {
     final Activity thisActivity = this;
     myRating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
       @Override
-      public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-        new RateStoreRequest(thisActivity, SharedPref.getToken(thisActivity), storeId, rating) {
-          @Override
-          public void handleResult(String result) {
-            Toast.makeText(StoreDetailActivity.this, "Rated...!", Toast.LENGTH_SHORT).show();
-            loadStoreDetail();
-          }
+      public void onRatingChanged(RatingBar ratingBar, final float rating, boolean fromUser) {
+        if (!fromUser) return;
+        AlertDialog.Builder builder = new AlertDialog.Builder(StoreDetailActivity.this);
+        builder.setTitle("Enter a note...!");
 
+        final EditText input = new EditText(StoreDetailActivity.this);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
           @Override
-          public void handleError(VolleyError error) {
-            Toast.makeText(StoreDetailActivity.this, "Rating failed...!", Toast.LENGTH_SHORT).show();
-            myRating.setRating(0);
+          public void onClick(DialogInterface dialog, int which) {
+            String content = input.getText().toString();
+            if (content.length() == 0) {
+              Toast.makeText(thisActivity, "Note can't be empty...!", Toast.LENGTH_SHORT).show();
+              return;
+            }
+            new RateStoreRequest(thisActivity, SharedPref.getToken(thisActivity), storeId, rating, content) {
+              @Override
+              public void handleResult(String result) {
+                Toast.makeText(StoreDetailActivity.this, "Rated...!", Toast.LENGTH_SHORT).show();
+                loadStoreDetail();
+              }
+
+              @Override
+              public void handleError(VolleyError error) {
+                Toast.makeText(StoreDetailActivity.this, "Rating failed...!", Toast.LENGTH_SHORT).show();
+                myRating.setRating(0);
+              }
+            };
           }
-        };
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+            dialog.cancel();
+          }
+        });
+
+        builder.show();
       }
     });
   }
@@ -109,30 +139,41 @@ public class StoreDetailActivity extends AppCompatActivity {
     myRating.setRating(store.myRating);
     txtAddress.setText(store.getFullAddress());
     txtPhone.setText(store.phone);
-    initTabLayout(store);
+    initTabLayout();
     tabLayout.getTabAt(0).select();
     loadPromotions(store.promotions);
   }
 
-  private void initTabLayout(final Store store) {
+  private void initTabLayout() {
     tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
       @Override
-      public void onTabSelected(TabLayout.Tab tab) {
-        int index = tab.getPosition();
-        switch (index) {
-          case 0:
-            loadPromotions(store.promotions);
-            break;
-          case 1:
-            loadServices(store.categories);
-            break;
-          case 2:
-            loadDiscussion(store.discusses);
-            break;
-          case 3:
-            loadRatings(store.ratings);
-            break;
-        }
+      public void onTabSelected(final TabLayout.Tab tab) {
+        new StoreDetailRequest(StoreDetailActivity.this, SharedPref.getToken(StoreDetailActivity.this), storeId) {
+          @Override
+          public void handleError(VolleyError error) {
+            error.printStackTrace();
+            Toast.makeText(StoreDetailActivity.this, "Error: Can't load store details...!", Toast.LENGTH_SHORT).show();
+            finish();
+          }
+          @Override
+          public void handleStore(final Store store) {
+            int index = tab.getPosition();
+            switch (index) {
+              case 0:
+                loadPromotions(store.promotions);
+                break;
+              case 1:
+                loadServices(store.categories);
+                break;
+              case 2:
+                loadDiscussion(store.discusses);
+                break;
+              case 3:
+                loadRatings(store.ratings);
+                break;
+            }
+          }
+        };
       }
 
       @Override

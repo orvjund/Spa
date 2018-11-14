@@ -12,11 +12,13 @@ public abstract class RateStoreRequest extends RequestBase {
   String token;
   int storeId;
   float stars;
-  public RateStoreRequest(Context context, String token, int storeId, float stars) {
+  String content;
+  public RateStoreRequest(Context context, String token, int storeId, float stars, String content) {
     super(context);
     this.token = token;
     this.storeId = storeId;
     this.stars = stars;
+    this.content = content;
     request();
   }
 
@@ -25,6 +27,7 @@ public abstract class RateStoreRequest extends RequestBase {
     params.put("Token", token);
     params.put("ID", Integer.toString(storeId));
     params.put("Rate", Float.toString(stars));
+    params.put("Note", content);
     POST(SpaURL.STORE_RATE, params);
   }
 }
