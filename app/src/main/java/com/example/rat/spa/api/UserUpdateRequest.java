@@ -28,8 +28,8 @@ public abstract class UserUpdateRequest extends RequestBase {
     params.put("Name", userApp.getName());
     params.put("Email", userApp.getEmail());
     params.put("Birthday", Long.toString(userApp.getBirthday().getTime()));
-    params.put("ProvinceID", Integer.toString(userApp.getProvinceId()));
-    params.put("DistrictID", Integer.toString(userApp.getDistrictId()));
+    params.put("IDProvince", Integer.toString(userApp.getProvinceId()));
+    params.put("IDDistrict", Integer.toString(userApp.getDistrictId()));
     params.put("Address", userApp.getAddress());
     params.put("Gender", Integer.toString(userApp.getGender()));
     POST(SpaURL.USER_UPDATE, params);
