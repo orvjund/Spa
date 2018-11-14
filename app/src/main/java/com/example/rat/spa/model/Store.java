@@ -16,7 +16,8 @@ public class Store {
   public String address;
   public String email;
   public String phone;
-  public float rating;
+  public float myRating;
+  public float averageRating;
   public ArrayList<Promotion> promotions;
   public ArrayList<Category> categories;
   public ArrayList<Discuss> discusses;
@@ -25,7 +26,8 @@ public class Store {
   public static Store parseJSON(String json) throws JSONException {
     Store store = new Store();
 
-    store.rating = parseRating(json);
+    store.myRating = parseRating(json);
+    store.averageRating = parseAverageRating(json);
 
     JSONObject storeJSON = new JSONObject(json)
         .getJSONObject("Data")
@@ -128,6 +130,12 @@ public class Store {
     return (float) new JSONObject(json)
         .getJSONObject("Data")
         .getDouble("Rating");
+  }
+
+  private static float parseAverageRating(String json) throws JSONException {
+    return (float) new JSONObject(json)
+        .getJSONObject("Data")
+        .getDouble("RatingAverage");
   }
 
   public String getFullAddress() {

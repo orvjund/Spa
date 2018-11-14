@@ -35,6 +35,7 @@ public class StoreDetailActivity extends AppCompatActivity {
   RatingBar rating;
   RatingBar myRating;
   TextView txtAddress;
+  TextView txtPhone;
   ListView lvTabLayout;
   TabLayout tabLayout;
   int storeId;
@@ -82,7 +83,8 @@ public class StoreDetailActivity extends AppCompatActivity {
     rating = findViewById(R.id.rating);
     myRating = findViewById(R.id.my_rating);
     txtAddress = findViewById(R.id.txt_address);
-    rating.setEnabled(false);
+    txtPhone = findViewById(R.id.txt_phone);
+//    rating.setEnabled(false);
   }
 
   private void loadStoreDetail() {
@@ -103,8 +105,10 @@ public class StoreDetailActivity extends AppCompatActivity {
 
   private void fillDetailToViews(Store store) {
     txtStoreName.setText(store.name);
-    rating.setRating(store.rating);
+    rating.setRating(store.averageRating);
+    myRating.setRating(store.myRating);
     txtAddress.setText(store.getFullAddress());
+    txtPhone.setText(store.phone);
     initTabLayout(store);
     tabLayout.getTabAt(0).select();
     loadPromotions(store.promotions);

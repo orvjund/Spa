@@ -49,6 +49,7 @@ public class OrderListAdapter extends BaseAdapter {
       myHolder.txtPhone = convertView.findViewById(R.id.txt_phone);
       myHolder.txtServices = convertView.findViewById(R.id.txt_services);
       myHolder.txtTime = convertView.findViewById(R.id.txt_time);
+      myHolder.txtDescribe = convertView.findViewById(R.id.txt_describe);
       convertView.setTag(myHolder);
     } else {
       myHolder = (MyHolder)convertView.getTag();
@@ -56,10 +57,11 @@ public class OrderListAdapter extends BaseAdapter {
 
     final Order order = orders.get(position);
     myHolder.txtUser.setText(order.userName);
-    myHolder.txtAddress.setText(order.address);
+    myHolder.txtAddress.setText(order.getFullAddress());
     myHolder.txtPhone.setText(order.phone);
     myHolder.txtServices.setText(order.categoryName);
     myHolder.txtTime.setText(order.onDate);
+    myHolder.txtDescribe.setText(order.describe);
 
     return convertView;
   }
@@ -77,5 +79,6 @@ public class OrderListAdapter extends BaseAdapter {
     TextView txtAddress;
     TextView txtTime;
     TextView txtPhone;
+    TextView txtDescribe;
   }
 }

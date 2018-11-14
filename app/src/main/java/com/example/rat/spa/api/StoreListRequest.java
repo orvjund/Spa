@@ -43,7 +43,7 @@ public abstract class StoreListRequest extends RequestBase {
         store.storeId = storeJSON.getInt("IDStore");
         store.name = storeJSON.getString("Name");
         store.describe = storeJSON.getString("Describe");
-        store.rating = storeJSON.getInt("Rated");
+        store.myRating = storeJSON.getInt("Rated");
         store.provinceName = storeJSON.getString("ProvinceName");
         store.districtName = storeJSON.getString("DistrictName");
         store.address = storeJSON.getString("Address");

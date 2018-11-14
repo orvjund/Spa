@@ -2,6 +2,7 @@ package com.example.rat.spa.activity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -127,6 +128,7 @@ public class BookingActivity extends AppCompatActivity {
         @Override
         public void handleResult(String result) {
           Toast.makeText(BookingActivity.this, "Order succeed...!", Toast.LENGTH_SHORT).show();
+          startActivity(new Intent(BookingActivity.this, BookingListActivity.class));
           finish();
         }
 

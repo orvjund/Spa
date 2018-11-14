@@ -15,4 +15,8 @@ public class Order {
   public int status = 1;
   public String address;
   public String phone;
+
+  public String getFullAddress() {
+    return address;
+  }
 }
