@@ -7,42 +7,42 @@
   tools:context=".activity.BookingListActivity">
 
   <android.support.design.widget.TabLayout
-    android:id="@+id/booking_list_tab_layout"
-    android:layout_width="0dp"
-    android:layout_height="86dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginBottom="424dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.0"
-    app:layout_constraintStart_toStartOf="parent"
-    app:tabIndicatorColor="@color/design_default_color_primary"
-    app:tabSelectedTextColor="@color/colorPrimary"
-    app:tabTextAppearance="@style/TabLayoutStyle1"
-    app:tabTextColor="?attr/colorButtonNormal">
+      android:id="@+id/booking_list_tab_layout"
+      android:layout_width="0dp"
+      android:layout_height="86dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginEnd="8dp"
+      android:layout_marginBottom="550dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:tabIndicatorColor="@color/design_default_color_primary"
+      app:tabSelectedTextColor="@color/colorPrimary"
+      app:tabTextAppearance="@style/TabLayoutStyle1"
+      app:tabTextColor="?attr/colorButtonNormal">
 
     <android.support.design.widget.TabItem
-      android:id="@+id/unconfirmed_tab_item"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="unconfirmed" />
+        android:id="@+id/unconfirmed_tab_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="unconfirmed" />
 
     <android.support.design.widget.TabItem
-      android:id="@+id/confirmed_tab_item"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Confirmed" />
+        android:id="@+id/confirmed_tab_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirmed" />
 
     <android.support.design.widget.TabItem
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Done" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Done" />
 
     <android.support.design.widget.TabItem
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Deny" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Deny" />
   </android.support.design.widget.TabLayout>
 
   <ListView
