@@ -1,15 +1,19 @@
 package com.example.rat.spa.activity;
 
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -18,29 +22,33 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.example.rat.spa.R;
 import com.example.rat.spa.api.AddressesRequest;
+import com.example.rat.spa.api.RegisterRequest;
 import com.example.rat.spa.api.UserIndexRequest;
 import com.example.rat.spa.api.UserUpdateRequest;
 import com.example.rat.spa.model.District;
 import com.example.rat.spa.model.Province;
 import com.example.rat.spa.model.UserApp;
 import com.example.rat.spa.util.SharedPref;
+import com.example.rat.spa.util.SpaUtil;
 
 import org.json.JSONException;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class EditUserInfoActivity extends AppCompatActivity {
+  Button btnUpdate;
   EditText etName;
   EditText etPhone;
   Spinner spinnerCity;
   Spinner spinnerDistrict;
   EditText etAddress;
   EditText etEmail;
-  EditText etDoB;
+  TextView txtDoB;
   TextView txtGender;
+  TextView labelOldPassword;
   EditText etOldPassword;
   EditText etNewPassword;
   EditText etRetypePassword;
@@ -48,18 +56,58 @@ public class EditUserInfoActivity extends AppCompatActivity {
   int currentProvinceId = -1;
   int currentDistrictId = -1;
   int userId;
+  boolean isRegister;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_edit_user_info);
 
-    getSupportActionBar().setTitle("Edit User Info");
+    Intent intent = getIntent();
+    isRegister = intent.getBooleanExtra("is-register", false);
 
     initViewVariables();
-    initCheckbox();
     initSpinners();
-    loadUserInfo();
+    initDoBSelection();
+
+    if (isRegister) {
+      getSupportActionBar().setTitle("Register");
+      initRegister();
+    } else {
+      getSupportActionBar().setTitle("Edit User Info");
+      initCheckbox();
+      loadUserInfo();
+    }
+  }
+
+  private void initDoBSelection() {
+    txtDoB.setText(SpaUtil.getFormattedDate(new Date()));
+    txtDoB.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        final Calendar calendar = Calendar.getInstance();
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+          @Override
+          public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, monthOfYear);
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            txtDoB.setText(SpaUtil.getFormattedDate(calendar.getTime()));
+          }
+        };
+        new DatePickerDialog(EditUserInfoActivity.this, date, calendar
+            .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)).show();
+      }
+    });
+  }
+
+  private void initRegister() {
+    btnUpdate.setText("Register");
+    etOldPassword.setInputType(InputType.TYPE_CLASS_TEXT);
+    etOldPassword.setEnabled(true);
+    labelOldPassword.setText("Username");
+    cbChangePassword.setVisibility(View.GONE);
   }
 
   private void initCheckbox() {
@@ -99,7 +147,7 @@ public class EditUserInfoActivity extends AppCompatActivity {
     etPhone.setText(userApp.getPhone());
     etAddress.setText(userApp.getAddress());
     etEmail.setText(userApp.getEmail());
-    etDoB.setText(userApp.getStringDoB());
+    txtDoB.setText(userApp.getStringDoB());
 
     switch (userApp.getGender()) {
       case 1:
@@ -127,6 +175,7 @@ public class EditUserInfoActivity extends AppCompatActivity {
             setDistrictSpinnerAdapter(provinces.get(position).getDistricts());
             currentProvinceId = provinces.get(position).getId();
           }
+
           @Override
           public void onNothingSelected(AdapterView<?> parent) {
           }
@@ -171,13 +220,15 @@ public class EditUserInfoActivity extends AppCompatActivity {
   }
 
   private void initViewVariables() {
+    labelOldPassword = findViewById(R.id.label_old_password);
+    btnUpdate = findViewById(R.id.btn_update);
     etName = findViewById(R.id.et_name);
     etPhone = findViewById(R.id.et_phone);
     spinnerCity = findViewById(R.id.spinner_city);
     spinnerDistrict = findViewById(R.id.spinner_district);
     etAddress = findViewById(R.id.et_address);
     etEmail = findViewById(R.id.et_email);
-    etDoB = findViewById(R.id.et_dob);
+    txtDoB = findViewById(R.id.et_dob);
     txtGender = findViewById(R.id.et_gender);
     etOldPassword = findViewById(R.id.et_old_password);
     etNewPassword = findViewById(R.id.et_new_password);
@@ -186,28 +237,38 @@ public class EditUserInfoActivity extends AppCompatActivity {
   }
 
   public void updateUserInfo(View view) {
+    btnUpdate.setEnabled(false);
+    if (isRegister) {
+      handleRegister();
+    } else {
+      handleEditUserInfo();
+    }
+  }
+
+  private void handleEditUserInfo() {
+    UserApp userApp = new UserApp();
     String oldPassword = etOldPassword.getText().toString();
     if (oldPassword.length() == 0) {
       Toast.makeText(this, "Enter current password...!", Toast.LENGTH_SHORT).show();
+      btnUpdate.setEnabled(true);
       return;
     }
-    String name = etName.getText().toString();
-    String phone = etPhone.getText().toString();
-    int provinceId = currentProvinceId;
-    int districtId = currentDistrictId;
-    String address = etAddress.getText().toString();
-    String email = etEmail.getText().toString();
-    Date dob;
+    userApp.setName(etName.getText().toString());
+    userApp.setPhone(etPhone.getText().toString());
+    userApp.setProvinceId(currentProvinceId);
+    userApp.setDistrictId(currentDistrictId);
+    userApp.setAddress(etAddress.getText().toString());
+    userApp.setEmail(etEmail.getText().toString());
     try {
-      dob = new SimpleDateFormat("yyyy/MM/dd").parse(etDoB.getText().toString());
+      userApp.setBirthday(SpaUtil.parseFormattedDate(txtDoB.getText().toString()));
     } catch (ParseException e) {
       e.printStackTrace();
       Toast.makeText(this, "Invalid birthday...!", Toast.LENGTH_SHORT).show();
+      btnUpdate.setEnabled(true);
       return;
     }
-    int gender = txtGender.getText().toString().equals("Make") ? 1 : 2;
+    userApp.setGender(txtGender.getText().toString().equals("Make") ? 1 : 2);
 
-    UserApp userApp = new UserApp(userId, name, phone, provinceId, districtId, address, email, dob, gender);
     new UserUpdateRequest(this, SharedPref.getToken(this), userApp, oldPassword) {
       @Override
       public void handleResult(String result) {
@@ -218,13 +279,91 @@ public class EditUserInfoActivity extends AppCompatActivity {
       @Override
       public void handleError(VolleyError error) {
         error.printStackTrace();
-        Toast.makeText(EditUserInfoActivity.this, "Error updating profile...!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(EditUserInfoActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+        btnUpdate.setEnabled(true);
       }
     };
+  }
 
-    //FIXME: Update password
+  private void handleRegister() {
+    UserApp userApp = new UserApp();
+    userApp.setUserName(etOldPassword.getText().toString());
     String newPassword = etNewPassword.getText().toString();
-    String retypePassword = etRetypePassword.getText().toString();
+    userApp.setPassword(newPassword);
+    userApp.setName(etName.getText().toString());
+    userApp.setPhone(etPhone.getText().toString());
+    userApp.setProvinceId(currentProvinceId);
+    userApp.setDistrictId(currentDistrictId);
+    userApp.setAddress(etAddress.getText().toString());
+    userApp.setEmail(etEmail.getText().toString());
+    try {
+      userApp.setBirthday(SpaUtil.parseFormattedDate(txtDoB.getText().toString()));
+    } catch (ParseException e) {
+      e.printStackTrace();
+      Toast.makeText(this, "Invalid birthday...!", Toast.LENGTH_SHORT).show();
+      btnUpdate.setEnabled(true);
+      return;
+    }
+    userApp.setGender(txtGender.getText().toString().equals("Make") ? 1 : 2);
+    if (!validUserApp(userApp)) {
+      btnUpdate.setEnabled(true);
+      return;
+    }
+    new RegisterRequest(this, userApp) {
+      @Override
+      public void handleResult(String result) {
+        Toast.makeText(EditUserInfoActivity.this, "Registered...!", Toast.LENGTH_SHORT).show();
+        startLoginActivity();
+      }
+
+      @Override
+      public void handleError(VolleyError error) {
+        btnUpdate.setEnabled(true);
+        error.printStackTrace();
+        Toast.makeText(EditUserInfoActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+      }
+    };
+  }
+
+  private boolean validUserApp(UserApp userApp) {
+    if (userApp.getUserName().length() == 0) {
+      Toast.makeText(this, "Enter username...!", Toast.LENGTH_SHORT).show();
+      return false;
+    }
+    if (userApp.getPassword().length() == 0) {
+      Toast.makeText(this, "Enter password...!", Toast.LENGTH_SHORT).show();
+      return false;
+    }
+    if (!userApp.getPassword().equals(etRetypePassword.getText().toString())) {
+      Toast.makeText(this, "Passwords must matches...!", Toast.LENGTH_SHORT).show();
+      return false;
+    }
+    if (userApp.getName().length() == 0) {
+      Toast.makeText(this, "Enter name...!", Toast.LENGTH_SHORT).show();
+      return false;
+    }
+    if (userApp.getPhone().length() == 0) {
+      Toast.makeText(this, "Enter phone number...!", Toast.LENGTH_SHORT).show();
+      return false;
+    }
+    if (userApp.getAddress().length() == 0) {
+      Toast.makeText(this, "Enter address...!", Toast.LENGTH_SHORT).show();
+      return false;
+    }
+    if (userApp.getEmail().length() == 0) {
+      Toast.makeText(this, "Enter email...!", Toast.LENGTH_SHORT).show();
+      return false;
+    }
+
+    return true;
+  }
+
+  private void startLoginActivity() {
+    Intent intent = new Intent(this, LoginActivity.class);
+    intent.putExtra("username", etOldPassword.getText().toString());
+    intent.putExtra("password", etNewPassword.getText().toString());
+    startActivity(intent);
+    finish();
   }
 
   private void startUserInfoActivity() {

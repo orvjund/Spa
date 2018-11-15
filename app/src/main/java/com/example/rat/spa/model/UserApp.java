@@ -1,5 +1,7 @@
 package com.example.rat.spa.model;
 
+import com.example.rat.spa.util.SpaUtil;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -10,6 +12,7 @@ public class UserApp {
   private int userId;
   private String token;
   private String name;
+  private String password;
   private String phone;
   private int provinceId;
   private String provinceName;
@@ -19,8 +22,18 @@ public class UserApp {
   private String email;
   private Date birthday;
   private int gender;
+  private String userName;
 
-  public UserApp() {}
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+  public UserApp() {
+  }
 
   public UserApp(int userId, String name, String phone, int provinceId, int districtId, String address, String email, Date birthday, int gender) {
     this.userId = userId;
@@ -136,7 +149,7 @@ public class UserApp {
   }
 
   public String getStringDoB() {
-    return new SimpleDateFormat("yyyy/MM/dd").format(birthday);
+    return SpaUtil.getFormattedDate(birthday);
   }
 
   public void setBirthday(Date birthday) {
@@ -162,5 +175,13 @@ public class UserApp {
     } catch (JSONException e) {
       return data.getJSONObject("UserApp");
     }
+  }
+
+  public String getUserName() {
+    return userName;
+  }
+
+  public void setUserName(String userName) {
+    this.userName = userName;
   }
 }

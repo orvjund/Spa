@@ -36,6 +36,12 @@ public class LoginActivity extends AppCompatActivity {
     } else {
       initLogin();
     }
+
+    if (getIntent().getStringExtra("username") != null) {
+      etUsername.setText(getIntent().getStringExtra("username"));
+      etPassword.setText(getIntent().getStringExtra("password"));
+      attemptLogin(btnLogin);
+    }
   }
 
   private void initViewVariables() {
@@ -130,4 +136,10 @@ public class LoginActivity extends AppCompatActivity {
     SharedPref.putString(this, "password", password);
   }
 
+  public void handleRegister(View view) {
+    Intent intent = new Intent(this, EditUserInfoActivity.class);
+    intent.putExtra("is-register", true);
+    startActivity(intent);
+    finish();
+  }
 }

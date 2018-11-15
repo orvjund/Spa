@@ -53,21 +53,22 @@ public class BookingActivity extends AppCompatActivity {
   }
 
   private void initBookingTimeSelection() {
-    final Calendar myCalendar = Calendar.getInstance();
+    final Calendar calendar = Calendar.getInstance();
     final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
       @Override
       public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-        myCalendar.set(Calendar.YEAR, year);
-        myCalendar.set(Calendar.MONTH, monthOfYear);
-        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, monthOfYear);
+        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        txtBookingTime.setText(SpaUtil.getFormattedDate(calendar.getTime()));
       }
     };
     txtBookingTime.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        new DatePickerDialog(BookingActivity.this, date, myCalendar
-            .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-            myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+        new DatePickerDialog(BookingActivity.this, date, calendar
+            .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)).show();
       }
     });
   }
