@@ -253,6 +253,7 @@ public class EditUserInfoActivity extends AppCompatActivity {
       btnUpdate.setEnabled(true);
       return;
     }
+    userApp.setUserId(userId);
     userApp.setName(etName.getText().toString());
     userApp.setPhone(etPhone.getText().toString());
     userApp.setProvinceId(currentProvinceId);
